@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback &amp; Complaints — Reach Supports</title>
+<meta name="description" content="Share feedback, raise a complaint, or pass on a compliment to Reach Supports. Every complaint is acknowledged within two business days, handled by a real person, and never affects your supports. You can give feedback anonymously.">
+<link rel="icon" type="image/jpeg" href="assets/rs-monogram.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   REACH SUPPORTS — DESIGN TOKENS  (shared with index.html)
+   ============================================================ */
+:root{
+  --paper:#FAF9F6;
+  --paper-2:#F3EFE7;
+  --ink:#1B211D;
+  --ink-60:rgba(27,33,29,.62);
+  --ink-40:rgba(27,33,29,.40);
+  --ink-12:rgba(27,33,29,.12);
+  --sage:#5F8D74;
+  --sage-deep:#3E6B54;
+  --sage-tint:#E6F0E9;
+  --clay:#D89A6E;
+  --clay-tint:#F6E7D8;
+  --mist:#E4EAF3;
+  --white:#FFFFFF;
+
+  --font-display:"Fraunces",Georgia,serif;
+  --font-body:"Manrope",-apple-system,"Segoe UI",sans-serif;
+
+  --section-pad:clamp(96px,12vw,168px);
+  --gutter:clamp(20px,5vw,64px);
+  --radius-lg:28px;
+  --radius-md:20px;
+  --radius-pill:999px;
+
+  --ease-out:cubic-bezier(.22,.68,0,1);
+  --dur:.9s;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+::selection{background:var(--sage);color:var(--white)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- Typography ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--sage-deep);margin-bottom:28px;
+}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--sage);border-radius:2px}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;line-height:1.06;letter-spacing:-.015em}
+.h-display{font-size:clamp(44px,7.4vw,104px)}
+.h-xl{font-size:clamp(36px,5.4vw,72px)}
+.h-lg{font-size:clamp(28px,3.6vw,46px)}
+.h-md{font-size:clamp(22px,2.4vw,30px);line-height:1.25}
+em.accent{font-style:italic;font-weight:400;color:var(--sage-deep)}
+.lede{font-size:clamp(17px,1.6vw,21px);color:var(--ink-60);max-width:56ch}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--font-body);font-weight:700;font-size:16px;
+  padding:18px 32px;border-radius:var(--radius-pill);
+  border:1.5px solid transparent;cursor:pointer;
+  transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out),background .3s,color .3s,border-color .3s;
+  will-change:transform;
+}
+.btn .arr{transition:transform .45s var(--ease-out);display:inline-block}
+.btn:hover .arr{transform:translateX(5px)}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--sage-deep);transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(62,107,84,.55)}
+.btn-ghost{border-color:var(--ink-12);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-3px)}
+.btn-light{background:var(--paper);color:var(--ink)}
+.btn-light:hover{background:var(--sage-tint);transform:translateY(-3px)}
+.btn-sm{padding:12px 22px;font-size:14px}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  transition:background .4s,box-shadow .4s,padding .4s;
+  padding:22px 0;
+}
+.nav.scrolled{
+  background:rgba(250,249,246,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 var(--ink-12);
+  padding:14px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo img{height:34px;width:auto;transition:height .4s}
+.nav.scrolled .nav-logo img{height:28px}
+.nav-links{display:flex;gap:36px;font-size:15px;font-weight:600}
+.nav-links a{position:relative;color:var(--ink-60);transition:color .3s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;
+  background:var(--sage);border-radius:2px;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease-out);
+}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* ---------- Hero (compact, page variant) ---------- */
+.hero{
+  position:relative;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:clamp(150px,18vh,210px) 0 clamp(40px,6vh,72px);overflow:hidden;
+}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;will-change:transform}
+.blob-1{width:560px;height:560px;background:var(--sage-tint);top:-120px;right:-140px}
+.blob-2{width:460px;height:460px;background:var(--clay-tint);top:30%;left:-180px}
+.hero-inner{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero .eyebrow{justify-content:center}
+.hero .eyebrow::before{display:none}
+.hero h1{max-width:18ch}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .w>span{display:inline-block;transform:translateY(115%);animation:riseUp 1.1s var(--ease-out) forwards;animation-delay:var(--d,0s)}
+@keyframes riseUp{to{transform:translateY(0)}}
+.hero .lede{margin:30px auto 40px;opacity:0;animation:fadeUp 1s var(--ease-out) .55s forwards;max-width:54ch}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 1s var(--ease-out) .7s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* ---------- Reveal-on-scroll ---------- */
+[data-reveal]{opacity:0;transform:translateY(44px);transition:opacity var(--dur) var(--ease-out),transform var(--dur) var(--ease-out);transition-delay:var(--d,0s)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ---------- Sections shared ---------- */
+section{padding:var(--section-pad) 0}
+.sec-head{max-width:760px;margin-bottom:clamp(48px,6vw,84px)}
+.sec-head .lede{margin-top:22px}
+
+/* ---------- Promises row (reuses who-card look) ---------- */
+.promise-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.promise-card{
+  background:var(--white);border:1px solid var(--ink-12);border-radius:var(--radius-lg);
+  padding:34px 30px;display:flex;flex-direction:column;gap:12px;min-height:200px;
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out),border-color .3s;
+}
+.promise-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px rgba(27,33,29,.22);border-color:transparent}
+.promise-card .glyph{
+  width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+  font-size:22px;margin-bottom:6px;
+}
+.promise-card:nth-child(4n+1) .glyph{background:var(--sage-tint)}
+.promise-card:nth-child(4n+2) .glyph{background:var(--clay-tint)}
+.promise-card:nth-child(4n+3) .glyph{background:var(--mist)}
+.promise-card:nth-child(4n) .glyph{background:var(--sage-tint)}
+.promise-card h3{font-size:19px;line-height:1.3}
+.promise-card p{font-size:14.5px;color:var(--ink-60)}
+
+/* ---------- Form section (reuses contact-form styles) ---------- */
+.form-sec{padding-top:clamp(60px,9vh,110px)}
+.form-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,5vw,72px);align-items:start}
+.form-intro .lede{margin-bottom:28px}
+.form-points{list-style:none;display:flex;flex-direction:column;gap:16px}
+.form-points li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:var(--ink-60)}
+.form-points .ico{flex:none;width:24px;height:24px;border-radius:50%;background:var(--sage-tint);color:var(--sage-deep);display:grid;place-items:center;font-size:12px;margin-top:1px;font-weight:700}
+.form-points a{color:var(--sage-deep);font-weight:700;border-bottom:1.5px solid var(--sage)}
+.form-points a:hover{color:var(--ink)}
+
+.feedback-form{display:flex;flex-direction:column;gap:18px;background:var(--paper-2);border-radius:var(--radius-lg);padding:clamp(24px,3vw,40px)}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:12.5px;font-weight:800;letter-spacing:.02em;color:var(--ink-60)}
+.field .opt{font-weight:400;color:var(--ink-40)}
+.field input,.field select,.field textarea{
+  font-family:inherit;font-size:16px;color:var(--ink);background:var(--paper);
+  border:1.5px solid var(--ink-12);border-radius:var(--radius-md);padding:14px 16px;width:100%;
+  transition:border-color .3s,box-shadow .3s;
+}
+.field textarea{min-height:130px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--sage);box-shadow:0 0 0 4px var(--sage-tint);
+}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.check-row{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--ink-60);line-height:1.55}
+.check-row input{margin-top:3px;width:18px;height:18px;accent-color:var(--sage);flex:none;cursor:pointer}
+.check-row label{cursor:pointer}
+.feedback-form button.btn{align-self:flex-start;margin-top:4px;border:none;cursor:pointer;font-family:inherit}
+.form-note{font-size:13px;color:var(--ink-40);line-height:1.6}
+.form-ok{
+  font-size:15px;font-weight:700;color:var(--sage-deep);display:none;line-height:1.6;
+  background:var(--sage-tint);border-radius:var(--radius-md);padding:16px 18px;
+}
+.form-ok.show{display:block}
+.privacy-line{font-size:13px;color:var(--ink-40);border-top:1px solid var(--ink-12);padding-top:16px;margin-top:2px;line-height:1.6}
+
+/* ---------- What happens next (sticky split, reuses .step) ---------- */
+.process-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,7vw,110px);align-items:start}
+.process-sticky{position:sticky;top:140px}
+.process-sticky .lede{margin-top:22px}
+.step{
+  display:grid;grid-template-columns:64px 1fr;gap:26px;
+  padding:44px 0;border-bottom:1px solid var(--ink-12);
+}
+.step:first-child{padding-top:8px}
+.step-num{
+  width:52px;height:52px;border-radius:50%;border:1.5px solid var(--sage);
+  display:grid;place-items:center;font-family:var(--font-display);font-style:italic;
+  font-size:17px;color:var(--sage-deep);background:var(--white);
+}
+.step h3{font-size:24px;margin-bottom:10px}
+.step p{color:var(--ink-60);font-size:16px}
+
+/* ---------- Escalation (dark panel, reuses .partners) ---------- */
+.escalate{
+  background:var(--ink);color:var(--paper);
+  border-radius:clamp(28px,4vw,48px);margin:0 clamp(8px,1.5vw,24px);
+  position:relative;overflow:hidden;
+}
+.escalate .eyebrow{color:#9CC4AC}
+.escalate .eyebrow::before{background:#9CC4AC}
+.escalate .lede{color:rgba(250,249,246,.66)}
+.escalate .blob-3{width:520px;height:520px;background:rgba(95,141,116,.35);top:-160px;right:-160px;position:absolute;border-radius:50%;filter:blur(110px)}
+.escalate-inner{position:relative;z-index:2}
+.esc-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.esc-step{
+  background:rgba(250,249,246,.05);border:1px solid rgba(250,249,246,.12);
+  border-radius:var(--radius-md);padding:32px 28px;
+  transition:background .4s,transform .5s var(--ease-out);
+}
+.esc-step:hover{background:rgba(250,249,246,.09);transform:translateY(-6px)}
+.esc-step .k{font-family:var(--font-display);font-style:italic;color:#9CC4AC;font-size:17px;display:block;margin-bottom:14px}
+.esc-step h3{font-size:20px;margin-bottom:10px;line-height:1.3}
+.esc-step p{font-size:14.5px;color:rgba(250,249,246,.62)}
+.esc-step .big{font-family:var(--font-display);font-size:clamp(26px,3vw,34px);color:#B8D8C4;line-height:1.1;margin:2px 0 12px;letter-spacing:-.01em}
+.esc-step a{color:#B8D8C4;font-weight:700;border-bottom:1px solid rgba(184,216,196,.5)}
+.esc-step a:hover{color:#fff}
+.esc-note{margin-top:40px;font-size:13.5px;color:rgba(250,249,246,.5);max-width:66ch}
+
+/* ---------- Footer ---------- */
+footer{
+  margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,246,.6);
+  padding:72px 0 44px;
+}
+.foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.foot-logo img{height:40px;filter:invert(1);opacity:.95}
+.foot-tag{font-size:13px;margin-top:16px;max-width:34ch;line-height:1.7}
+.foot-col h4{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,249,246,.4);margin-bottom:18px;font-family:var(--font-body);font-weight:700}
+.foot-col a{display:block;font-size:15px;color:rgba(250,249,246,.75);margin-bottom:12px;transition:color .3s}
+.foot-col a:hover{color:#B8D8C4}
+.foot-base{
+  border-top:1px solid rgba(250,249,246,.12);margin-top:56px;padding-top:28px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:rgba(250,249,246,.4);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .promise-grid{grid-template-columns:repeat(2,1fr)}
+  .esc-steps{grid-template-columns:1fr}
+  .process-grid,.form-grid{grid-template-columns:1fr}
+  .process-sticky{position:static}
+}
+@media (max-width:680px){
+  .nav-links{display:none}
+  .promise-grid{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  .btn{padding:16px 26px;font-size:15px}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+  .hero h1 .w>span{transform:none}
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="/" aria-label="Reach Supports home">
+      <img src="assets/logo-black.png" alt="Reach Supports — Mental Health Community Services">
+    </a>
+    <div class="nav-links">
+      <a href="/#who">Who we support</a>
+      <a href="/#what">What we do</a>
+      <a href="/#approach">Our approach</a>
+      <a href="/#partners">Referrals</a>
+      <a href="/#contact">Contact</a>
+    </div>
+    <a href="#form" class="btn btn-primary btn-sm">Share feedback <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero" id="top">
+  <div class="blob blob-1" data-parallax="0.25"></div>
+  <div class="blob blob-2" data-parallax="-0.15"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow" style="opacity:0;animation:fadeUp 1s var(--ease-out) .1s forwards">Feedback &amp; Complaints</span>
+    <h1 class="h-display" id="heroTitle">Your voice helps us <em class="accent">get it right.</em></h1>
+    <p class="lede">Whether something's gone wrong, could be better, or a worker went above and beyond — we want to hear it. Every complaint, concern and compliment makes our support better, and raising one will never affect the support you receive.</p>
+    <div class="hero-ctas">
+      <a href="#form" class="btn btn-primary">Share feedback <span class="arr">→</span></a>
+      <a href="#process" class="btn btn-ghost">How we handle it</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== PROMISES ==================== -->
+<section id="promises" style="padding-top:clamp(20px,3vh,40px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-reveal>Our promise to you</span>
+      <h2 class="h-xl" data-reveal style="--d:.08s">Speaking up should feel <em class="accent">safe.</em></h2>
+      <p class="lede" data-reveal style="--d:.16s">You never have to worry about raising something with us. Here's what we commit to every time.</p>
+    </div>
+    <div class="promise-grid">
+      <article class="promise-card" data-reveal style="--d:0s">
+        <div class="glyph">🕑</div>
+        <h3>Acknowledged fast</h3>
+        <p>We'll confirm we've received your complaint within two business days — from a real person, not an auto-reply.</p>
+      </article>
+      <article class="promise-card" data-reveal style="--d:.08s">
+        <div class="glyph">🛟</div>
+        <h3>Never held against you</h3>
+        <p>Raising a concern will never affect your supports, your worker, or how you're treated. Ever.</p>
+      </article>
+      <article class="promise-card" data-reveal style="--d:.16s">
+        <div class="glyph">🤫</div>
+        <h3>Anonymous if you want</h3>
+        <p>You can give feedback without leaving your name. You're also welcome to have a family member, friend or advocate help.</p>
+      </article>
+      <article class="promise-card" data-reveal style="--d:.24s">
+        <div class="glyph">🤝</div>
+        <h3>Handled by a person</h3>
+        <p>One of our team owns your feedback from start to finish, listens properly, and follows through.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FORM ==================== -->
+<section class="form-sec" id="form">
+  <div class="wrap form-grid">
+    <div class="form-intro">
+      <span class="eyebrow" data-reveal>Tell us what happened</span>
+      <h2 class="h-xl" data-reveal style="--d:.08s">Share your feedback or <em class="accent">complaint.</em></h2>
+      <p class="lede" data-reveal style="--d:.16s">Use the form and a member of our team will be in touch. There's no wrong way to raise something — say as much or as little as you like.</p>
+      <ul class="form-points" data-reveal style="--d:.24s">
+        <li><span class="ico">✉</span><div>Prefer email? Write to us directly at <a href="mailto:feedback@reachsupports.com">feedback@reachsupports.com</a></div></li>
+        <li><span class="ico">🤫</span><div>Want to stay anonymous? Tick the box in the form and leave your details blank.</div></li>
+        <li><span class="ico">↗</span><div>You can also raise a concern with someone independent at any time — see <a href="#escalate">other ways to complain</a> below.</div></li>
+      </ul>
+    </div>
+
+    <form class="feedback-form" id="feedbackForm" data-reveal style="--d:.12s" novalidate>
+      <div class="field">
+        <label for="ff-type">What kind of feedback is this?</label>
+        <select id="ff-type" name="type" required>
+          <option value="">Please choose…</option>
+          <option>Complaint</option>
+          <option>Concern</option>
+          <option>Suggestion for improvement</option>
+          <option>Compliment</option>
+          <option>General feedback</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ff-role">I'm sharing this as</label>
+        <select id="ff-role" name="role">
+          <option value="">Please choose…</option>
+          <option>A person who receives supports</option>
+          <option>A family member or guardian</option>
+          <option>An advocate or nominee</option>
+          <option>A support coordinator</option>
+          <option>A worker or staff member</option>
+          <option>Someone else</option>
+        </select>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="ff-anon" name="anonymous">
+        <label for="ff-anon">I'd like to stay anonymous. <span style="color:var(--ink-40)">(You can leave your name, email and phone blank. Note: if you send this by email, your own email address will still be visible to us — for a fully anonymous complaint, please call the NDIS Commission on 1800&nbsp;035&nbsp;544.)</span></label>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="ff-name">Your name <span class="opt">(optional)</span></label>
+          <input id="ff-name" name="name" type="text" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="ff-phone">Phone <span class="opt">(optional)</span></label>
+          <input id="ff-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+      </div>
+      <div class="field">
+        <label for="ff-email">Email <span class="opt">(optional — so we can reply)</span></label>
+        <input id="ff-email" name="email" type="email" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="ff-about">Which service, worker or shift is this about? <span class="opt">(optional)</span></label>
+        <input id="ff-about" name="about" type="text">
+      </div>
+      <div class="field">
+        <label for="ff-details">What happened? Tell us in your own words</label>
+        <textarea id="ff-details" name="details" required placeholder="Include dates, people or places if you can — but only share what you're comfortable with."></textarea>
+      </div>
+      <div class="field">
+        <label for="ff-outcome">What would a good outcome look like for you? <span class="opt">(optional)</span></label>
+        <textarea id="ff-outcome" name="outcome" style="min-height:90px"></textarea>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="ff-consent" name="consent" checked>
+        <label for="ff-consent">It's OK for Reach Supports to contact me about this feedback.</label>
+      </div>
+
+      <!-- Honeypot: hidden from people, catches bots. Do not remove. -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+        <label for="ff-company">Company (leave this blank)</label>
+        <input id="ff-company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Send to our team <span class="arr">→</span></button>
+      <p class="form-note">Your feedback is sent securely to the Reach Supports team and logged in our complaints system. If anything goes wrong, your email app will open as a backup so you can still send it to feedback@reachsupports.com.</p>
+      <p class="form-ok" id="formOk">Thanks for speaking up — we've received your feedback. A real person will be in touch within two business days. There's nothing more you need to do.</p>
+      <p class="privacy-line">Your feedback is treated confidentially and only shared with the people who need to be involved to resolve it. We keep a record of complaints so we can learn from them and improve — in line with the NDIS Practice Standards.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ==================== WHAT HAPPENS NEXT ==================== -->
+<section id="process">
+  <div class="wrap process-grid">
+    <div class="process-sticky">
+      <span class="eyebrow" data-reveal>Our complaints process</span>
+      <h2 class="h-xl" data-reveal style="--d:.08s">What happens after you <em class="accent">hit send.</em></h2>
+      <p class="lede" data-reveal style="--d:.16s">No black box. Here's exactly how we handle every complaint — clear steps, real people, and follow-through you can count on.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step" data-reveal>
+        <div class="step-num">01</div>
+        <div>
+          <h3>You reach out</h3>
+          <p>However suits you — this form, an email, a phone call, or a quiet word in person. You can involve a family member, friend or advocate, and you can stay anonymous.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">02</div>
+        <div>
+          <h3>We acknowledge it</h3>
+          <p>Within two business days you'll hear from a real person confirming we've received your feedback, who's looking after it, and what happens next.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">03</div>
+        <div>
+          <h3>We look into it</h3>
+          <p>We listen, gather the facts, and work with you — and anyone you'd like involved — to understand what happened. We'll keep you updated along the way.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">04</div>
+        <div>
+          <h3>We put it right</h3>
+          <p>We agree on a resolution with you, act on it, and check back to make sure you're satisfied. We also use what we learn to make our supports better for everyone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ESCALATION ==================== -->
+<section class="escalate" id="escalate">
+  <div class="blob-3"></div>
+  <div class="wrap escalate-inner">
+    <div class="sec-head">
+      <span class="eyebrow" data-reveal>If you'd rather go elsewhere</span>
+      <h2 class="h-xl" data-reveal style="--d:.08s">You can always take it <em class="accent" style="color:#B8D8C4">further.</em></h2>
+      <p class="lede" data-reveal style="--d:.16s">We hope to sort things out with you directly — but you have every right to raise a concern with someone independent, at any time. You never have to come to us first, and it's always free.</p>
+    </div>
+    <div class="esc-steps">
+      <div class="esc-step" data-reveal>
+        <span class="k">Independent &amp; free</span>
+        <h3>NDIS Quality &amp; Safeguards Commission</h3>
+        <div class="big">1800 035 544</div>
+        <p>The independent body that handles complaints about NDIS supports and services. Free call within Australia. Online: <a href="https://www.ndiscommission.gov.au/about/complaints" target="_blank" rel="noopener">ndiscommission.gov.au</a></p>
+      </div>
+      <div class="esc-step" data-reveal style="--d:.08s">
+        <span class="k">If you need an interpreter</span>
+        <h3>Translating &amp; Interpreting Service</h3>
+        <div class="big">131 450</div>
+        <p>Call TIS National and ask them to connect you to the NDIS Commission in your language. The National Relay Service (<a href="https://www.accesshub.gov.au/" target="_blank" rel="noopener">accesshub.gov.au</a>) can help if you're deaf or hard of hearing.</p>
+      </div>
+      <div class="esc-step" data-reveal style="--d:.16s">
+        <span class="k">Support to speak up</span>
+        <h3>Get an advocate on your side</h3>
+        <p>You can ask a family member, friend or an independent disability advocate to help you make a complaint. Find a free advocate through the <a href="https://disabilityadvocacyfinder.dss.gov.au/" target="_blank" rel="noopener">Disability Advocacy Finder</a>.</p>
+      </div>
+    </div>
+    <p class="esc-note" data-reveal>In an emergency, or if someone is in immediate danger, always call <strong style="color:#fff">000</strong>. Reach Supports takes all concerns about the safety or wellbeing of the people we support seriously and will act on them straight away.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-logo">
+        <img src="assets/logo-black.png" alt="Reach Supports">
+        <p class="foot-tag">NDIS mental health &amp; community support. Genuine relationships, everyday independence.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="/#who">Who we support</a>
+        <a href="/#what">What we do</a>
+        <a href="/#approach">Our approach</a>
+        <a href="/#partners">Referral partners</a>
+      </div>
+      <div class="foot-col">
+        <h4>Feedback</h4>
+        <a href="mailto:feedback@reachsupports.com">feedback@reachsupports.com</a>
+        <a href="#form">Share feedback</a>
+        <a href="https://www.ndiscommission.gov.au/about/complaints" target="_blank" rel="noopener">NDIS Commission</a>
+      </div>
+      <div class="foot-col">
+        <h4>Acknowledgement</h4>
+        <p style="font-size:13.5px;max-width:32ch;line-height:1.7">We acknowledge the Traditional Custodians of the lands on which we work, and pay our respects to Elders past and present.</p>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Reach Supports. All rights reserved.</span>
+      <span>Mental Health Community Services</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* --- Hero headline: split words for staggered rise --- */
+(() => {
+  const h = document.getElementById('heroTitle');
+  if (!h || prefersReduced) return;
+  const splitNode = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        const w = document.createElement('span'); w.className = 'w';
+        const inner = document.createElement('span'); inner.textContent = part;
+        w.appendChild(inner); frag.appendChild(w);
+      });
+      node.replaceWith(frag);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      [...node.childNodes].forEach(splitNode);
+    }
+  };
+  [...h.childNodes].forEach(splitNode);
+  h.querySelectorAll('.w > span').forEach((s, i) => s.style.setProperty('--d', (0.08 + i * 0.07) + 's'));
+})();
+
+/* --- Reveal on scroll --- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+/* --- Nav state --- */
+const nav = document.getElementById('nav');
+const onScrollNav = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+onScrollNav();
+window.addEventListener('scroll', onScrollNav, { passive: true });
+
+/* --- Gentle parallax on hero blobs --- */
+if (!prefersReduced) {
+  const pEls = [...document.querySelectorAll('[data-parallax]')];
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      pEls.forEach(el => { el.style.transform = `translateY(${y * parseFloat(el.dataset.parallax)}px)`; });
+      ticking = false;
+    });
+  }, { passive: true });
+}
+
+/* --- Anonymous toggle: soften required contact fields --- */
+const anonBox = document.getElementById('ff-anon');
+const consentBox = document.getElementById('ff-consent');
+if (anonBox) {
+  anonBox.addEventListener('change', () => {
+    if (anonBox.checked) { consentBox.checked = false; }
+  });
+}
+
+/* --- Feedback form → Reach Supports portal (mailto fallback) --- */
+/* Complaints are recorded in the portal's Complaints register + a triage task.
+   PORTAL_ENDPOINT points at the staging API for now; swap to the production API
+   URL when production is stood up. */
+const PORTAL_ENDPOINT = 'https://reach-api-staging-bco2hytd5q-ts.a.run.app/public/complaints';
+
+const fForm = document.getElementById('feedbackForm');
+if (fForm) {
+  const okEl = document.getElementById('formOk');
+
+  const buildMailto = (g, f) => {
+    const type = g('type') || 'Feedback';
+    const name = g('name');
+    const subject = `[${type}] Website feedback form${name ? ' — ' + name : ''}`;
+    const body = [
+      `Type of feedback: ${type}`,
+      `Sharing this as: ${g('role') || '(not stated)'}`,
+      `Wants to stay anonymous: ${f.get('anonymous') ? 'Yes' : 'No'}`,
+      '',
+      `Name: ${name || '(not provided)'}`,
+      `Email: ${g('email') || '(not provided)'}`,
+      `Phone: ${g('phone') || '(not provided)'}`,
+      `OK to be contacted: ${f.get('consent') ? 'Yes' : 'No'}`,
+      '',
+      `About (service / worker / shift): ${g('about') || '(not provided)'}`,
+      '',
+      'What happened:',
+      g('details'),
+      '',
+      'Outcome hoped for:',
+      g('outcome') || '(not provided)',
+      '',
+      '— Sent via the Reach Supports feedback & complaints form (reachsupports.com/feedback)'
+    ].join('\n');
+    return `mailto:feedback@reachsupports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  fForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!fForm.reportValidity()) return;
+    const f = new FormData(fForm);
+    const g = (k) => (f.get(k) || '').toString().trim();
+
+    const payload = {
+      type: g('type'),
+      role: g('role'),
+      name: g('name'),
+      email: g('email'),
+      phone: g('phone'),
+      about: g('about'),
+      details: g('details'),
+      outcome: g('outcome'),
+      consent: !!f.get('consent'),
+      anonymous: !!f.get('anonymous'),
+      company: g('company')
+    };
+
+    const btn = fForm.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; }
+
+    try {
+      const res = await fetch(PORTAL_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Portal responded ' + res.status);
+      // Recorded in the portal — confirm and reset the form.
+      okEl.classList.add('show');
+      fForm.reset();
+      okEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (err) {
+      // Portal unreachable — fall back to email so nothing is ever lost.
+      okEl.textContent = 'Your email app is opening as a backup — just press send and a real person will be in touch within two business days.';
+      okEl.classList.add('show');
+      window.location.href = buildMailto(g, f);
+    } finally {
+      if (btn) { btn.disabled = false; }
+    }
+  });
+}
+</script>
+</body>
+</html>
