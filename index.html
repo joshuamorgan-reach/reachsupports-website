@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reach Supports — NDIS Mental Health &amp; Community Support</title>
 <meta name="description" content="Reach Supports is an NDIS mental health and community support provider. Community participation, in-home and daily living support — built around the person, not the paperwork.">
-<link rel="icon" href="assets/rs-monogram.jpg">
+<link rel="icon" type="image/jpeg" href="assets/rs-monogram.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   REACH SUPPORTS — DESIGN TOKENS   (image-free placeholder build)
+   REACH SUPPORTS — DESIGN TOKENS
    ============================================================ */
 :root{
   /* Colour */
@@ -62,12 +62,6 @@ ul{list-style:none}
 ::selection{background:var(--sage);color:var(--white)}
 
 .wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
-
-/* ============================================================
-   LOGO
-   ============================================================ */
-.nav-logo img{height:40px;width:auto;transition:height .4s}
-.nav.scrolled .nav-logo img{height:32px}
 
 /* ============================================================
    TYPOGRAPHY
@@ -122,6 +116,8 @@ em.accent{font-style:italic;font-weight:400;color:var(--sage-deep)}
   padding:14px 0;
 }
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo img{height:34px;width:auto;transition:height .4s}
+.nav.scrolled .nav-logo img{height:28px}
 .nav-links{display:flex;gap:36px;font-size:15px;font-weight:600}
 .nav-links a{position:relative;color:var(--ink-60);transition:color .3s}
 .nav-links a:hover{color:var(--ink)}
@@ -133,7 +129,7 @@ em.accent{font-style:italic;font-weight:400;color:var(--sage-deep)}
 .nav-links a:hover::after{transform:scaleX(1)}
 
 /* ============================================================
-   HERO — centred headline + full-bleed gradient card row
+   HERO — centred headline + full-bleed video card row
    ============================================================ */
 .hero{
   position:relative;
@@ -153,6 +149,64 @@ em.accent{font-style:italic;font-weight:400;color:var(--sage-deep)}
 .hero .lede{margin:30px auto 40px;opacity:0;animation:fadeUp 1s var(--ease-out) .55s forwards;max-width:48ch}
 .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 1s var(--ease-out) .7s forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* --- Full-bleed video card row --- */
+.media-row{
+  position:relative;z-index:2;
+  margin-top:clamp(56px,8vh,92px);
+  opacity:0;animation:fadeUp 1.1s var(--ease-out) .9s forwards;
+}
+.media-track{
+  display:flex;gap:18px;align-items:center;
+  overflow-x:auto;scrollbar-width:none;
+  padding:18px max(calc((100vw - 1500px)/2),20px);
+  scroll-snap-type:x mandatory;cursor:grab;
+}
+.media-track::-webkit-scrollbar{display:none}
+.media-track.dragging{cursor:grabbing;scroll-snap-type:none}
+.v-card{
+  flex:none;width:clamp(200px,17.5vw,262px);aspect-ratio:9/13.6;
+  border-radius:22px;position:relative;overflow:hidden;
+  scroll-snap-align:center;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:20px;
+  transition:transform .6s var(--ease-out),box-shadow .6s var(--ease-out);
+  box-shadow:0 18px 42px -24px rgba(27,33,29,.35);
+}
+.v-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 34px 64px -28px rgba(27,33,29,.45)}
+.v-card:nth-child(odd){transform:translateY(14px)}
+.v-card:nth-child(odd):hover{transform:translateY(4px) scale(1.02)}
+.v-card::after{ /* bottom gradient for caption legibility */
+  content:"";position:absolute;inset:auto 0 0 0;height:52%;
+  background:linear-gradient(to top,rgba(20,28,23,.62),transparent);
+}
+.v-card:nth-child(6n+1){background:linear-gradient(160deg,#A9C6B4,#5F8D74)}
+.v-card:nth-child(6n+2){background:linear-gradient(160deg,#EBD2B8,#D89A6E)}
+.v-card:nth-child(6n+3){background:linear-gradient(160deg,#CDD8EA,#8FA5C6)}
+.v-card:nth-child(6n+4){background:linear-gradient(160deg,#DED5C3,#B3A88E)}
+.v-card:nth-child(6n+5){background:linear-gradient(160deg,#CBDFD2,#7FA98F)}
+.v-card:nth-child(6n){background:linear-gradient(160deg,#F0DBCB,#C98B62)}
+.v-card .v-ph{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  color:rgba(255,255,255,.85);font-size:34px;
+}
+.v-card video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+}
+.v-card::after{z-index:1}
+.v-card .v-play{
+  position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.9);display:grid;place-items:center;z-index:2;
+  transition:transform .5s var(--ease-out);
+}
+.v-card:hover .v-play{transform:scale(1.12)}
+.v-card .v-cap{position:relative;z-index:2;color:#fff}
+.v-card .v-cap h4{font-family:var(--font-body);font-weight:800;font-size:16px;line-height:1.3;margin-bottom:6px}
+.v-card .v-cap span{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:700;color:rgba(255,255,255,.85);
+}
+.v-card .v-cap span::before{content:"↗";font-size:12px}
 
 /* Marquee */
 .marquee{
@@ -278,25 +332,19 @@ section{padding:var(--section-pad) 0}
 .partners-note{font-size:13.5px;color:rgba(250,249,246,.5);max-width:44ch}
 
 /* ============================================================
-   PARTICIPANTS & FAMILY  (image-free panel)
+   PARTICIPANTS & FAMILY
    ============================================================ */
 .family-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,7vw,110px);align-items:center}
 .family-media{
   aspect-ratio:4/4.6;border-radius:var(--radius-lg);overflow:hidden;position:relative;
   background:linear-gradient(160deg,var(--sage-tint),var(--clay-tint) 85%);
-  display:flex;flex-direction:column;justify-content:flex-end;padding:34px;
 }
-.family-media .fm-quote{
-  position:relative;z-index:2;font-family:var(--font-display);font-style:italic;
-  font-size:clamp(22px,2.4vw,30px);line-height:1.3;color:var(--ink);max-width:20ch;
+.ph-label{
+  position:absolute;inset:auto 20px 20px 20px;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(8px);
+  border-radius:14px;padding:14px 18px;font-size:13px;font-weight:600;color:var(--ink-60);
 }
-.family-media .fm-quote::before{content:"“";position:absolute;top:-.5em;left:-.05em;font-size:2.4em;color:var(--sage);opacity:.5;z-index:-1}
-.family-media .fm-by{position:relative;z-index:2;margin-top:18px;font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--sage-deep)}
-.family-media .fm-mark{
-  position:absolute;top:26px;left:34px;font-family:var(--font-display);font-weight:500;
-  font-size:20px;color:var(--ink);opacity:.32;z-index:2;
-}
-.family-media .fm-mark .dot{color:var(--sage);opacity:1}
+.ph-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);opacity:.35;width:44%;}
 .check-list{margin-top:36px;display:flex;flex-direction:column;gap:0}
 .check-list li{
   display:flex;gap:18px;align-items:flex-start;padding:22px 0;
@@ -309,7 +357,7 @@ section{padding:var(--section-pad) 0}
 }
 
 /* ============================================================
-   COMMUNITY GALLERY — horizontal strip (image-free tiles)
+   COMMUNITY GALLERY — horizontal strip
    ============================================================ */
 .gallery{padding-bottom:0}
 .gallery-strip{
@@ -322,11 +370,8 @@ section{padding:var(--section-pad) 0}
 .g-tile{
   flex:none;width:clamp(240px,30vw,400px);border-radius:var(--radius-lg);
   scroll-snap-align:start;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:space-between;padding:28px;
-  transition:transform .6s var(--ease-out),box-shadow .6s var(--ease-out);
-  box-shadow:0 18px 42px -30px rgba(27,33,29,.4);
+  display:flex;align-items:flex-end;padding:22px;
 }
-.g-tile:hover{transform:translateY(-6px);box-shadow:0 30px 60px -32px rgba(27,33,29,.4)}
 .g-tile.tall{aspect-ratio:3/4}
 .g-tile.wide{aspect-ratio:4/3;align-self:center}
 .g-tile.square{aspect-ratio:1/1;align-self:center}
@@ -334,13 +379,15 @@ section{padding:var(--section-pad) 0}
 .g-tile:nth-child(4n+2){background:linear-gradient(165deg,var(--clay-tint),#EBD2B8)}
 .g-tile:nth-child(4n+3){background:linear-gradient(165deg,var(--mist),#CDD8EA)}
 .g-tile:nth-child(4n){background:linear-gradient(165deg,#EFEAE0,#DED5C3)}
-.g-tile .g-kicker{
-  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--sage-deep);opacity:.85;
+.g-tile img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .8s var(--ease-out);
 }
-.g-tile .g-word{
-  font-family:var(--font-display);font-weight:400;line-height:1.12;letter-spacing:-.01em;
-  font-size:clamp(22px,2.3vw,30px);color:var(--ink);max-width:14ch;
+.g-tile:hover img{transform:scale(1.05)}
+.g-tile .cap{
+  position:relative;z-index:2;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(8px);
+  border-radius:12px;padding:10px 16px;font-size:12.5px;font-weight:700;color:var(--ink-60);
 }
 .g-hint{
   display:flex;align-items:center;gap:10px;justify-content:center;
@@ -349,13 +396,14 @@ section{padding:var(--section-pad) 0}
 }
 
 /* ============================================================
-   STORY / VIDEO PLACEHOLDER  (image-free)
+   VIDEO PLACEHOLDER
    ============================================================ */
 .video-shell{
   position:relative;aspect-ratio:16/8.2;border-radius:clamp(24px,3vw,40px);overflow:hidden;
   background:linear-gradient(140deg,#243B2F,#3E6B54 60%,#5F8D74);
   display:grid;place-items:center;
 }
+.video-shell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .video-shell::after{content:"";position:absolute;inset:0;z-index:1;
   background:linear-gradient(180deg,rgba(20,28,23,.18),rgba(20,28,23,.5));}
 .video-shell .play{
@@ -418,7 +466,7 @@ footer{
   padding:72px 0 44px;
 }
 .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
-.foot-logo img{height:46px;width:auto;filter:invert(1);opacity:.92}
+.foot-logo img{height:40px;filter:invert(1);opacity:.95}
 .foot-tag{font-size:13px;margin-top:16px;max-width:34ch;line-height:1.7}
 .foot-col h4{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,249,246,.4);margin-bottom:18px;font-family:var(--font-body);font-weight:700}
 .foot-col a{display:block;font-size:15px;color:rgba(250,249,246,.75);margin-bottom:12px;transition:color .3s}
@@ -489,10 +537,36 @@ footer{
   <div class="wrap hero-inner">
     <span class="eyebrow" style="opacity:0;animation:fadeUp 1s var(--ease-out) .1s forwards">NDIS Mental Health &amp; Community Support</span>
     <h1 class="h-display" id="heroTitle">Support that <em class="accent">meets you</em> where you are.</h1>
-    <p class="lede">Reach Supports walks alongside people living with mental health challenges — building confidence, connection and everyday independence, one genuine relationship at a time.</p>
+    <p class="lede">Reach Supports walks alongside people living with psychosocial disability and mental health challenges — building confidence, connection and everyday independence, one genuine relationship at a time.</p>
     <div class="hero-ctas">
       <a href="https://www.jotform.com/230881146648866" target="_blank" rel="noopener" class="btn btn-primary">Make a referral <span class="arr">→</span></a>
       <a href="#what" class="btn btn-ghost">See what we do</a>
+    </div>
+  </div>
+
+  <!-- Full-bleed video card row (placeholders — swap for muted looping video clips) -->
+  <div class="media-row">
+    <div class="media-track" id="mediaTrack">
+      <div class="v-card">
+        <video src="assets/videos/fishing-days.mp4" poster="assets/videos/fishing-days-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <span class="v-play"><svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M11.3 6.15a1 1 0 0 1 0 1.7L1.5 13.7A1 1 0 0 1 0 12.85V1.15A1 1 0 0 1 1.5.3l9.8 5.85Z" fill="#1B211D"/></svg></span>
+        <div class="v-cap"><h4>Fishing days</h4><span>Community access</span></div>
+      </div>
+      <div class="v-card">
+        <video src="assets/videos/pier-days.mp4" poster="assets/videos/pier-days-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <span class="v-play"><svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M11.3 6.15a1 1 0 0 1 0 1.7L1.5 13.7A1 1 0 0 1 0 12.85V1.15A1 1 0 0 1 1.5.3l9.8 5.85Z" fill="#1B211D"/></svg></span>
+        <div class="v-cap"><h4>Pier catch-ups</h4><span>Social connection</span></div>
+      </div>
+      <div class="v-card">
+        <video src="assets/videos/companion-dog.mp4" poster="assets/videos/companion-dog-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <span class="v-play"><svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M11.3 6.15a1 1 0 0 1 0 1.7L1.5 13.7A1 1 0 0 1 0 12.85V1.15A1 1 0 0 1 1.5.3l9.8 5.85Z" fill="#1B211D"/></svg></span>
+        <div class="v-cap"><h4>Everyone's best mate</h4><span>Simple joys</span></div>
+      </div>
+      <div class="v-card">
+        <video src="assets/videos/getting-out.mp4" poster="assets/videos/getting-out-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <span class="v-play"><svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M11.3 6.15a1 1 0 0 1 0 1.7L1.5 13.7A1 1 0 0 1 0 12.85V1.15A1 1 0 0 1 1.5.3l9.8 5.85Z" fill="#1B211D"/></svg></span>
+        <div class="v-cap"><h4>Getting out together</h4><span>Real moments</span></div>
+      </div>
     </div>
   </div>
 
@@ -518,27 +592,27 @@ footer{
       <article class="who-card" data-reveal style="--d:0s">
         <div class="glyph">🌱</div>
         <h3>NDIS participants</h3>
-        <p>People living with mental health challenges, working toward recovery, independence and a life that feels like their own.</p>
+        <p>People with psychosocial disability working toward recovery, independence and a life that feels like their own.</p>
       </article>
       <article class="who-card" data-reveal style="--d:.08s">
         <div class="glyph">🧭</div>
-        <h3>Working with your support team</h3>
-        <p>We work closely with your Support Coordinator, allied health professionals, family and other important people in your life — keeping your supports coordinated, practical and focused on what matters to you.</p>
+        <h3>Support coordinators</h3>
+        <p>Refer your participants to a support-worker team that works alongside you — clear communication, honest follow-through, and less chasing for you.</p>
       </article>
       <article class="who-card" data-reveal style="--d:.16s">
         <div class="glyph">🤝</div>
-        <h3>Working with families &amp; guardians</h3>
-        <p>With your consent, we work closely with families, guardians and the people who matter to you — valuing clear communication and collaboration, while keeping your choices, dignity and independence at the centre.</p>
+        <h3>Families &amp; guardians</h3>
+        <p>Reassurance that the person you care about is supported by workers who genuinely know and value them.</p>
       </article>
       <article class="who-card" data-reveal style="--d:0s">
         <div class="glyph">💬</div>
-        <h3>Community-based mental health support</h3>
-        <p>Practical, community-based support to improve your mental health, build confidence and grow independence. You stay in control of your goals and your pace — we're here to guide, encourage and work alongside you.</p>
+        <h3>Mental health teams</h3>
+        <p>Community-based psychosocial support that complements clinical care and keeps momentum between appointments.</p>
       </article>
       <article class="who-card" data-reveal style="--d:.08s">
-        <div class="glyph">🫂</div>
-        <h3>Social &amp; community connection</h3>
-        <p>We support you to explore your interests, meet new people, join social groups and feel more connected to your local community — always shaped around your comfort level, interests and personal goals.</p>
+        <div class="glyph">🏥</div>
+        <h3>Hospitals &amp; discharge planners</h3>
+        <p>Reliable step-down support that helps people transition from inpatient care back into everyday community life.</p>
       </article>
       <article class="who-card" data-reveal style="--d:.16s">
         <div class="glyph">🔗</div>
@@ -646,7 +720,7 @@ footer{
     <div class="sec-head">
       <span class="eyebrow" data-reveal>For referral partners</span>
       <h2 class="h-xl" data-reveal style="--d:.08s">Refer with <em class="accent" style="color:#B8D8C4">confidence.</em></h2>
-      <p class="lede" data-reveal style="--d:.16s">Support Coordinators, allied health professionals and community teams refer to us because we respond fast, communicate honestly, and deliver the support we promise.</p>
+      <p class="lede" data-reveal style="--d:.16s">Support coordinators, mental health teams and hospitals refer to us because we respond fast, communicate honestly, and deliver the support we promise.</p>
     </div>
     <div class="stats">
       <div class="stat" data-reveal><div class="num">You first</div><div class="lbl">A person-centred approach — support shaped around the person, never a template</div></div>
@@ -693,9 +767,8 @@ footer{
       </ul>
     </div>
     <div class="family-media" data-reveal style="--d:.1s">
-      <span class="fm-mark">Reach Supports<span class="dot">.</span></span>
-      <p class="fm-quote">The right support doesn't feel like a service. It feels like someone in your corner.</p>
-      <span class="fm-by">— What we aim for, every match</span>
+      <img class="ph-mark" src="assets/logo-black.png" alt="">
+      <div class="ph-label">📷 Image placeholder — participant &amp; worker doing an everyday activity together (candid, warm, natural light)</div>
     </div>
   </div>
 </section>
@@ -708,23 +781,23 @@ footer{
     <p class="lede" data-reveal style="--d:.16s">Support doesn't happen in an office. It happens at the pool, the café, the footy, the kitchen table — wherever life is.</p>
   </div>
   <div class="gallery-strip" id="galleryStrip" data-reveal>
-    <div class="g-tile tall"><span class="g-kicker">Together</span><p class="g-word">Christmas party smiles</p></div>
-    <div class="g-tile wide"><span class="g-kicker">Mates</span><p class="g-word">Thumbs up from the boys</p></div>
-    <div class="g-tile tall"><span class="g-kicker">Everyday joy</span><p class="g-word">Shared laughs</p></div>
-    <div class="g-tile wide"><span class="g-kicker">Belonging</span><p class="g-word">The whole Reach family</p></div>
-    <div class="g-tile tall"><span class="g-kicker">Good days</span><p class="g-word">Party legends</p></div>
-    <div class="g-tile wide"><span class="g-kicker">Connection</span><p class="g-word">Mates &amp; belonging</p></div>
-    <div class="g-tile tall"><span class="g-kicker">Giving</span><p class="g-word">Secret Santa moments</p></div>
-    <div class="g-tile wide"><span class="g-kicker">Festive</span><p class="g-word">Festive catch-ups</p></div>
-    <div class="g-tile square"><span class="g-kicker">Spirit</span><p class="g-word">Festive spirit</p></div>
-    <div class="g-tile wide"><span class="g-kicker">The table</span><p class="g-word">Around the table</p></div>
-    <div class="g-tile tall"><span class="g-kicker">Catch-ups</span><p class="g-word">Café catch-ups</p></div>
-    <div class="g-tile wide"><span class="g-kicker">Shared meals</span><p class="g-word">Dinner together</p></div>
+    <div class="g-tile tall"><img src="assets/photos/gallery-01.jpg" alt="Two friends smiling at the Reach Supports Christmas party" loading="lazy"><div class="cap">Christmas party smiles</div></div>
+    <div class="g-tile wide"><img src="assets/photos/gallery-09.jpg" alt="Two mates giving thumbs up at the Christmas dinner" loading="lazy"><div class="cap">Thumbs up from the boys</div></div>
+    <div class="g-tile tall"><img src="assets/photos/gallery-10.jpg" alt="Two friends laughing together at a community event" loading="lazy"><div class="cap">Shared laughs</div></div>
+    <div class="g-tile wide"><img src="assets/photos/gallery-11.jpg" alt="The whole Reach Supports crew at the Christmas dinner" loading="lazy"><div class="cap">The whole Reach family</div></div>
+    <div class="g-tile tall"><img src="assets/photos/gallery-13.jpg" alt="Friends celebrating with a peace sign" loading="lazy"><div class="cap">Party legends</div></div>
+    <div class="g-tile wide"><img src="assets/photos/gallery-02.jpg" alt="Group of friends together at a community celebration" loading="lazy"><div class="cap">Mates &amp; belonging</div></div>
+    <div class="g-tile tall"><img src="assets/photos/gallery-03.jpg" alt="Friends sharing gifts at Secret Santa" loading="lazy"><div class="cap">Secret Santa moments</div></div>
+    <div class="g-tile wide"><img src="assets/photos/gallery-15.jpg" alt="Two mates in festive spirit at the dinner table" loading="lazy"><div class="cap">Festive catch-ups</div></div>
+    <div class="g-tile square"><img src="assets/photos/gallery-16.jpg" alt="Two friends in festive shirts at the Christmas dinner" loading="lazy"><div class="cap">Festive spirit</div></div>
+    <div class="g-tile wide"><img src="assets/photos/gallery-06.jpg" alt="Sharing a meal around the table" loading="lazy"><div class="cap">Around the table</div></div>
+    <div class="g-tile tall"><img src="assets/photos/gallery-17.jpg" alt="Young man laughing at a café catch-up" loading="lazy"><div class="cap">Café catch-ups</div></div>
+    <div class="g-tile wide"><img src="assets/photos/gallery-08.jpg" alt="Friends enjoying dinner together" loading="lazy"><div class="cap">Dinner together</div></div>
   </div>
   <div class="g-hint">← Drag to explore →</div>
 </section>
 
-<!-- ==================== STORY / VIDEO SECTION ==================== -->
+<!-- ==================== VIDEO SECTION ==================== -->
 <section id="story">
   <div class="wrap">
     <div class="sec-head">
@@ -732,10 +805,11 @@ footer{
       <h2 class="h-xl" data-reveal style="--d:.08s">See what support looks like <em class="accent">in real life.</em></h2>
     </div>
     <div class="video-shell" data-reveal style="--d:.12s">
+      <img src="assets/photos/team-photo.jpg" alt="The Reach Supports team together at their Christmas celebration">
       <div class="play" role="button" aria-label="Brand film coming soon">
         <svg width="26" height="30" viewBox="0 0 26 30" fill="none"><path d="M25 13.27a2 2 0 0 1 0 3.46L3 29.4A2 2 0 0 1 0 27.66V2.34A2 2 0 0 1 3 .6l22 12.67Z" fill="#1B211D"/></svg>
       </div>
-      <span class="video-note">🎬 Our brand film is on the way — a look at the team behind Reach.</span>
+      <span class="video-note">🎬 Our brand film is on the way — for now, here's the team behind Reach.</span>
     </div>
   </div>
 </section>
@@ -823,7 +897,6 @@ footer{
         <h4>Contact</h4>
         <a href="mailto:referrals@reachsupports.com">referrals@reachsupports.com</a>
         <a href="https://www.jotform.com/230881146648866" target="_blank" rel="noopener">Make a referral</a>
-        <a href="/feedback">Feedback &amp; complaints</a>
       </div>
       <div class="foot-col">
         <h4>Acknowledgement</h4>
@@ -872,6 +945,20 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
+/* --- Hero video cards: play only while visible --- */
+const cardVids = document.querySelectorAll('.v-card video');
+if (prefersReduced) {
+  cardVids.forEach(v => v.removeAttribute('loop'));
+} else {
+  const vidIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.play().catch(() => {});
+      else e.target.pause();
+    });
+  }, { threshold: 0.25 });
+  cardVids.forEach(v => vidIO.observe(v));
+}
+
 /* --- Contact form → email (flags website origin) --- */
 const cForm = document.getElementById('contactForm');
 if (cForm) {
@@ -918,7 +1005,25 @@ if (!prefersReduced) {
   }, { passive: true });
 }
 
-/* --- Drag-to-scroll strips (hero card row + community gallery) --- */
+/* --- Stat counters --- */
+const statIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix || '';
+    statIO.unobserve(el);
+    if (prefersReduced) { el.textContent = end + suf; return; }
+    const t0 = performance.now(), dur = 1400;
+    const tick = (t) => {
+      const p = Math.min((t - t0) / dur, 1);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suf;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('[data-count]').forEach(el => statIO.observe(el));
+
+/* --- Drag-to-scroll strips (hero video row + community gallery) --- */
 const makeDraggable = (strip) => {
   if (!strip) return;
   let down = false, startX = 0, startLeft = 0;
@@ -930,6 +1035,15 @@ const makeDraggable = (strip) => {
   ['pointerup','pointercancel'].forEach(ev => strip.addEventListener(ev, () => { down = false; strip.classList.remove('dragging'); }));
 };
 makeDraggable(document.getElementById('galleryStrip'));
+const mediaTrack = document.getElementById('mediaTrack');
+makeDraggable(mediaTrack);
+
+/* Centre the hero video row so cards bleed off both edges */
+if (mediaTrack) {
+  requestAnimationFrame(() => {
+    mediaTrack.scrollLeft = (mediaTrack.scrollWidth - mediaTrack.clientWidth) / 2;
+  });
+}
 </script>
 </body>
 </html>
