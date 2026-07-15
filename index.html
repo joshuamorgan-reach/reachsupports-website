@@ -461,6 +461,24 @@ section{padding:var(--section-pad) 0}
 .form-ok.show{display:block}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
 
+/* ============================================================
+   FEEDBACK & COMPLAINTS
+   ============================================================ */
+.feedback-sec{background:var(--paper-2);border-radius:clamp(28px,4vw,48px);margin:0 clamp(8px,1.5vw,24px)}
+.fb-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.fb-step{
+  background:var(--paper);border:1px solid rgba(31,36,32,.08);
+  border-radius:var(--radius-md);padding:32px 28px;
+  transition:transform .5s var(--ease-out),box-shadow .5s;
+}
+.fb-step:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(31,36,32,.08)}
+.fb-step .k{font-family:var(--font-display);font-style:italic;color:var(--sage-deep);font-size:17px;display:block;margin-bottom:14px}
+.fb-step h3{font-size:20px;margin-bottom:10px;line-height:1.3}
+.fb-step p{font-size:14.5px;color:var(--ink-60)}
+.fb-step a{color:var(--sage-deep);font-weight:700;border-bottom:1.5px solid var(--sage)}
+.fb-cta{margin-top:56px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.fb-note{font-size:13.5px;color:var(--ink-40);max-width:52ch;line-height:1.7}
+
 footer{
   margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,246,.6);
   padding:72px 0 44px;
@@ -481,7 +499,7 @@ footer{
    ============================================================ */
 @media (max-width:980px){
   .who-grid{grid-template-columns:repeat(2,1fr)}
-  .stats,.ref-steps{grid-template-columns:1fr 1fr}
+  .stats,.ref-steps,.fb-steps{grid-template-columns:1fr 1fr}
   .approach-grid,.family-grid{grid-template-columns:1fr}
   .approach-sticky{position:static}
   .svc-row{grid-template-columns:56px 1fr;gap:8px 20px}
@@ -492,7 +510,7 @@ footer{
 @media (max-width:680px){
   .nav-links{display:none}
   .who-grid{grid-template-columns:1fr}
-  .stats,.ref-steps{grid-template-columns:1fr}
+  .stats,.ref-steps,.fb-steps{grid-template-columns:1fr}
   .v-card{width:64vw}
   .media-track{gap:14px;padding:14px 20px}
   .btn{padding:16px 26px;font-size:15px}
@@ -525,6 +543,7 @@ footer{
       <a href="#approach">Our approach</a>
       <a href="#partners">Referrals</a>
       <a href="#contact">Contact</a>
+      <a href="#feedback">Feedback</a>
     </div>
     <a href="https://www.jotform.com/230881146648866" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Make a referral <span class="arr">→</span></a>
   </div>
@@ -876,6 +895,38 @@ footer{
   </div>
 </section>
 
+<!-- ==================== FEEDBACK & COMPLAINTS ==================== -->
+<section class="feedback-sec" id="feedback">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-reveal>Feedback &amp; complaints</span>
+      <h2 class="h-xl" data-reveal style="--d:.08s">Tell us how we're <em class="accent">really</em> doing.</h2>
+      <p class="lede" data-reveal style="--d:.16s">Compliments, suggestions or complaints — we want to hear them all. Speaking up will never affect your supports, you can stay anonymous, and you're welcome to have a family member, friend or advocate help you at any step.</p>
+    </div>
+    <div class="fb-steps">
+      <div class="fb-step" data-reveal>
+        <span class="k">Step one</span>
+        <h3>Tell us</h3>
+        <p>Talk to your support worker or any of our team, email <a href="mailto:management@reachsupports.com">management@reachsupports.com</a>, or use our <a href="https://form.jotform.com/231440887663867" target="_blank" rel="noopener">feedback form</a> — anonymously if you prefer.</p>
+      </div>
+      <div class="fb-step" data-reveal style="--d:.08s">
+        <span class="k">Step two</span>
+        <h3>We listen and act</h3>
+        <p>We'll acknowledge your feedback promptly, look into it properly, keep you updated along the way, and work with you on a fair outcome.</p>
+      </div>
+      <div class="fb-step" data-reveal style="--d:.16s">
+        <span class="k">Step three</span>
+        <h3>More support if you need it</h3>
+        <p>You can also contact the NDIS Quality and Safeguards Commission at any time — call <a href="tel:1800035544">1800 035 544</a> or visit <a href="https://www.ndiscommission.gov.au" target="_blank" rel="noopener">ndiscommission.gov.au</a>. It's free, and you don't need to talk to us first.</p>
+      </div>
+    </div>
+    <div class="fb-cta" data-reveal>
+      <a href="https://form.jotform.com/231440887663867" target="_blank" rel="noopener" class="btn btn-primary">Share your feedback <span class="arr">→</span></a>
+      <p class="fb-note">Every piece of feedback goes to our management team — and complaints are always handled respectfully and confidentially.</p>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ==================== FOOTER ==================== -->
@@ -897,6 +948,7 @@ footer{
         <h4>Contact</h4>
         <a href="mailto:referrals@reachsupports.com">referrals@reachsupports.com</a>
         <a href="https://www.jotform.com/230881146648866" target="_blank" rel="noopener">Make a referral</a>
+        <a href="#feedback">Feedback &amp; complaints</a>
       </div>
       <div class="foot-col">
         <h4>Acknowledgement</h4>
