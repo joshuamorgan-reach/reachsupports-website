@@ -614,9 +614,8 @@ if (anonBox) {
 
 /* --- Feedback form → Reach Supports portal (mailto fallback) --- */
 /* Complaints are recorded in the portal's Complaints register + a triage task.
-   PORTAL_ENDPOINT points at the staging API for now; swap to the production API
-   URL when production is stood up. */
-const PORTAL_ENDPOINT = 'https://reach-api-staging-bco2hytd5q-ts.a.run.app/public/complaints';
+   PORTAL_ENDPOINT points at the production API (portal.reachsupports.com's backend). */
+const PORTAL_ENDPOINT = 'https://reach-api-prod-633869031029.australia-southeast1.run.app/public/complaints';
 
 const fForm = document.getElementById('feedbackForm');
 if (fForm) {
