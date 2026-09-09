@@ -200,6 +200,8 @@ section{padding:var(--section-pad) 0}
   background:var(--sage-tint);border-radius:var(--radius-md);padding:16px 18px;
 }
 .form-ok.show{display:block}
+.form-ok-ref{display:block;margin-top:12px;padding-top:12px;border-top:1px solid rgba(62,107,84,.25);font-weight:400;color:var(--ink-60);font-size:14px}
+.form-ok-ref strong{display:inline-block;font-size:16px;font-weight:800;color:var(--sage-deep);background:var(--white);border:1px solid rgba(62,107,84,.35);border-radius:8px;padding:3px 12px;letter-spacing:.04em;margin:0 2px}
 .privacy-line{font-size:13px;color:var(--ink-40);border-top:1px solid var(--ink-12);padding-top:16px;margin-top:2px;line-height:1.6}
 
 /* ---------- What happens next (sticky split, reuses .step) ---------- */
@@ -437,7 +439,7 @@ footer{
 
       <button type="submit" class="btn btn-primary">Send to our team <span class="arr">→</span></button>
       <p class="form-note">Your feedback is sent securely to the Reach Supports team and logged in our complaints system. If anything goes wrong, your email app will open as a backup so you can still send it to feedback@reachsupports.com.</p>
-      <p class="form-ok" id="formOk">Thanks for speaking up — we've received your feedback. A real person will be in touch within two business days. There's nothing more you need to do.</p>
+      <p class="form-ok" id="formOk"><span id="formOkText">Thanks for speaking up — we've received your feedback. A real person will be in touch within two business days. There's nothing more you need to do.</span><span class="form-ok-ref" id="formOkRef" hidden>Your reference: <strong id="formOkRefCode"></strong> Keep it handy — mentioning it helps us find your feedback straight away if you get in touch.</span></p>
       <p class="privacy-line">Your feedback is treated confidentially and only shared with the people who need to be involved to resolve it. We keep a record of complaints so we can learn from them and improve — in line with the NDIS Practice Standards.</p>
     </form>
   </div>
@@ -678,7 +680,18 @@ if (fForm) {
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error('Portal responded ' + res.status);
-      // Recorded in the portal — confirm and reset the form.
+      // Recorded in the portal — confirm, show the reference, reset the form.
+      let reference = '';
+      try {
+        const data = await res.json();
+        if (data && data.reference) reference = String(data.reference);
+      } catch (ignore) { /* body wasn't JSON — still recorded, just no reference to show */ }
+      const refEl = document.getElementById('formOkRef');
+      const refCode = document.getElementById('formOkRefCode');
+      if (reference && refEl && refCode) {
+        refCode.textContent = reference;
+        refEl.hidden = false;
+      }
       okEl.classList.add('show');
       fForm.reset();
       okEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
