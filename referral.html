@@ -378,7 +378,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
       <h2 class="h-xl" data-reveal style="--d:.08s">About five <em class="accent">minutes.</em></h2>
       <p class="lede" data-reveal style="--d:.16s" data-v-other="Fill in what you can. Only the participant's name, a way to reach you, and their agreement to the referral are needed to send it." data-v-self="Fill in what you can. All we need to send it is your name, a phone number or email, and your OK for us to receive it.">Fill in what you can. Only the participant's name, a way to reach you, and their agreement to the referral are needed to send it.</p>
       <ul class="form-points" data-reveal style="--d:.24s">
-        <li><span class="ico">✉</span><div>Prefer email? Send the details to <a href="mailto:referrals@reachsupports.com">referrals@reachsupports.com</a></div></li>
+        <li><span class="ico">✉</span><div>Prefer email? Send the details to <a href="mailto:management@reachsupports.com">management@reachsupports.com</a></div></li>
         <li><span class="ico">✨</span><div>Not sure which NDIS supports fit? Describe what <span data-v-other="they need" data-v-self="you need">they need</span> and use <b>Match to NDIS line items</b> — it's optional, and everything stays to be confirmed.</div></li>
         <li><span class="ico">🔒</span><div>Everything you send goes to a secure client-management system, seen only by the people arranging supports.</div></li>
       </ul>
@@ -716,7 +716,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
       </div>
       <div class="foot-col">
         <h4>Referrals</h4>
-        <a href="mailto:referrals@reachsupports.com">referrals@reachsupports.com</a>
+        <a href="mailto:management@reachsupports.com">management@reachsupports.com</a>
         <a href="#form">Make a referral</a>
         <a href="/feedback.html">Feedback &amp; complaints</a>
       </div>
@@ -811,7 +811,7 @@ const API_BASE = (() => {
   if (/^\d{4,5}$/.test(wanted)) return 'http://localhost:' + wanted;
   return API_BASES.prod;
 })();
-const FALLBACK_EMAIL = 'referrals@reachsupports.com';
+const FALLBACK_EMAIL = 'management@reachsupports.com';
 const MAX_FILES = 10;
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
