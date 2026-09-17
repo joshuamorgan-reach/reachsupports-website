@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Make a Referral — Reach Supports</title>
-<meta name="description" content="Refer someone to Reach Supports for NDIS mental health and community support. Tell us what they're looking for in your own words — anything you don't know yet, just write TBC. A real person will be back in touch within one business day.">
+<meta name="description" content="Make a referral to Reach Supports for NDIS mental health and community support — for someone you support, or for yourself. Tell us what's needed in your own words; anything you don't know yet, just write TBC. A real person will be back in touch within one business day.">
 <link rel="icon" type="image/jpeg" href="assets/rs-monogram.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -330,9 +330,9 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
   <div class="blob blob-1" data-parallax="0.25"></div>
   <div class="blob blob-2" data-parallax="-0.15"></div>
   <div class="wrap hero-inner">
-    <span class="eyebrow" style="opacity:0;animation:fadeUp 1s var(--ease-out) .1s forwards">Make a referral</span>
-    <h1 class="h-display" id="heroTitle">Refer someone to <em class="accent">Reach.</em></h1>
-    <p class="lede">Tell us who you're referring and what they're looking for, in your own words. Anything you don't know yet, just write TBC — we'll work the rest out together. A real person will be back in touch within one business day.</p>
+    <span class="eyebrow" style="opacity:0;animation:fadeUp 1s var(--ease-out) .1s forwards">Referrals</span>
+    <h1 class="h-display" id="heroTitle">Make a referral to <em class="accent">Reach.</em></h1>
+    <p class="lede">Referring someone you support, or looking for support for yourself? Tell us what's needed in your own words. Anything you don't know yet, just write TBC — we'll work the rest out together. A real person will be back in touch within one business day.</p>
     <div class="hero-ctas">
       <a href="#form" class="btn btn-primary">Start the referral <span class="arr">→</span></a>
       <a href="#process" class="btn btn-ghost">What happens next</a>
@@ -354,7 +354,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
       <article class="promise-card" data-reveal style="--d:.08s">
         <div class="glyph">✍️</div>
         <h3>Your words are perfect</h3>
-        <p>No codes or jargon needed. Describe the days, times and help they're after however it makes sense to you.</p>
+        <p>No codes or jargon needed. Describe the days, times and help that's needed however it makes sense to you.</p>
       </article>
       <article class="promise-card" data-reveal style="--d:.16s">
         <div class="glyph">❓</div>
@@ -376,10 +376,10 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
     <aside class="form-aside">
       <span class="eyebrow" data-reveal>The referral form</span>
       <h2 class="h-xl" data-reveal style="--d:.08s">About five <em class="accent">minutes.</em></h2>
-      <p class="lede" data-reveal style="--d:.16s">Fill in what you can. Only the participant's name, a way to reach you, and their agreement to the referral are needed to send it.</p>
+      <p class="lede" data-reveal style="--d:.16s" data-v-other="Fill in what you can. Only the participant's name, a way to reach you, and their agreement to the referral are needed to send it." data-v-self="Fill in what you can. All we need to send it is your name, a phone number or email, and your OK for us to receive it.">Fill in what you can. Only the participant's name, a way to reach you, and their agreement to the referral are needed to send it.</p>
       <ul class="form-points" data-reveal style="--d:.24s">
         <li><span class="ico">✉</span><div>Prefer email? Send the details to <a href="mailto:referrals@reachsupports.com">referrals@reachsupports.com</a></div></li>
-        <li><span class="ico">✨</span><div>Not sure which NDIS supports fit? Describe what they need and use <b>Match to NDIS line items</b> — it's optional, and everything stays to be confirmed.</div></li>
+        <li><span class="ico">✨</span><div>Not sure which NDIS supports fit? Describe what <span data-v-other="they need" data-v-self="you need">they need</span> and use <b>Match to NDIS line items</b> — it's optional, and everything stays to be confirmed.</div></li>
         <li><span class="ico">🔒</span><div>Everything you send goes to a secure client-management system, seen only by the people arranging supports.</div></li>
       </ul>
     </aside>
@@ -438,8 +438,8 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         <div class="part-head">
           <span class="part-num">02</span>
           <div>
-            <h3>The person being referred</h3>
-            <p>Their details as they appear on their NDIS plan, if you have them.</p>
+            <h3 data-v-other="The person being referred" data-v-self="Your details">The person being referred</h3>
+            <p data-v-other="Their details as they appear on their NDIS plan, if you have them." data-v-self="As they appear on your NDIS plan, if you have it handy.">Their details as they appear on their NDIS plan, if you have them.</p>
           </div>
         </div>
         <div class="field-row-3">
@@ -452,7 +452,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
             <input id="rf-last" name="lastName" type="text" autocomplete="off">
           </div>
           <div class="field">
-            <label for="rf-pref">Goes by <span class="opt">(optional)</span></label>
+            <label for="rf-pref"><span data-v-other="Goes by" data-v-self="What you like to be called">Goes by</span> <span class="opt">(optional)</span></label>
             <input id="rf-pref" name="preferredName" type="text" autocomplete="off">
           </div>
         </div>
@@ -468,16 +468,17 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         </div>
         <div class="field-row">
           <div class="field" id="f-phone">
-            <label for="rf-pphone">Their phone <span class="opt">(optional)</span></label>
+            <label for="rf-pphone"><span data-v-other="Their phone" data-v-self="Your phone">Their phone</span> <span class="opt" data-only="other">(optional)</span></label>
             <input id="rf-pphone" name="phone" type="tel" autocomplete="off">
           </div>
           <div class="field" id="f-email">
-            <label for="rf-pemail">Their email <span class="opt">(optional)</span></label>
+            <label for="rf-pemail"><span data-v-other="Their email" data-v-self="Your email">Their email</span> <span class="opt" data-only="other">(optional)</span></label>
             <input id="rf-pemail" name="email" type="email" autocomplete="off">
           </div>
         </div>
+        <p class="hint" data-only="self" hidden>So we can get back to you — a phone number or an email is fine.</p>
         <div class="field">
-          <label for="rf-address">Their address or suburb <span class="opt">(optional)</span></label>
+          <label for="rf-address"><span data-v-other="Their address or suburb" data-v-self="Your address or suburb">Their address or suburb</span> <span class="opt">(optional)</span></label>
           <input id="rf-address" name="address" type="text" autocomplete="off">
         </div>
       </fieldset>
@@ -487,7 +488,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         <div class="part-head">
           <span class="part-num">03</span>
           <div>
-            <h3>Their NDIS plan</h3>
+            <h3 data-v-other="Their NDIS plan" data-v-self="Your NDIS plan">Their NDIS plan</h3>
             <p>Leave anything you don't know blank.</p>
           </div>
         </div>
@@ -509,7 +510,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
               <option value="ndia_managed">The NDIA (agency managed)</option>
               <option value="unsure">Not sure</option>
             </select>
-            <span class="hint">We support participants whose funding is plan-managed or self-managed.</span>
+            <span class="hint">We support people whose funding is plan-managed or self-managed.</span>
           </div>
         </div>
         <div class="field-row-3">
@@ -533,7 +534,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         <div class="part-head">
           <span class="part-num">04</span>
           <div>
-            <h3>What supports are they looking for?</h3>
+            <h3 data-v-other="What supports are they looking for?" data-v-self="What supports are you looking for?">What supports are they looking for?</h3>
             <p>In plain English, as best you can. Tap TBC for anything still to be worked out.</p>
           </div>
         </div>
@@ -572,7 +573,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
             <label for="rf-travel">Travel and transport needs</label>
             <button type="button" class="tbc" data-tbc="rf-travel" aria-pressed="false">TBC</button>
           </div>
-          <textarea id="rf-travel" name="travelNeeds" style="min-height:80px" placeholder="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week."></textarea>
+          <textarea id="rf-travel" name="travelNeeds" style="min-height:80px" placeholder="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week." data-ph-other="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week." data-ph-self="e.g. I don't drive — I'd need lifts to the GP and shops, maybe 20 km a week."></textarea>
         </div>
 
         <div class="helper" id="helper">
@@ -600,13 +601,13 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         <div class="part-head">
           <span class="part-num">05</span>
           <div>
-            <h3>About them</h3>
-            <p>Whatever will help us support them well from the first visit.</p>
+            <h3 data-v-other="About them" data-v-self="About you">About them</h3>
+            <p data-v-other="Whatever will help us support them well from the first visit." data-v-self="Whatever will help us support you well from the first visit.">Whatever will help us support them well from the first visit.</p>
           </div>
         </div>
         <div class="field">
           <label for="rf-about">Anything else we should know? <span class="opt">(optional)</span></label>
-          <textarea id="rf-about" name="aboutParticipant" style="min-height:140px" placeholder="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate."></textarea>
+          <textarea id="rf-about" name="aboutParticipant" style="min-height:140px" placeholder="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate." data-ph-other="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate." data-ph-self="Your goals, what matters to you, health or safety considerations, what has and hasn't worked before, how you like to communicate."></textarea>
         </div>
         <div class="field-row-3">
           <div class="field">
@@ -618,7 +619,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
             <input id="rf-ecrel" name="emergencyContactRelationship" type="text" autocomplete="off" placeholder="e.g. Sister">
           </div>
           <div class="field">
-            <label for="rf-ecphone">Their phone</label>
+            <label for="rf-ecphone">Their phone <span class="opt">(the contact's)</span></label>
             <input id="rf-ecphone" name="emergencyContactPhone" type="tel" autocomplete="off">
           </div>
         </div>
@@ -643,7 +644,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
       <fieldset class="part" data-reveal>
         <div class="check-row" id="f-consent">
           <input type="checkbox" id="rf-consent" name="consent">
-          <label for="rf-consent"><b style="color:var(--ink)">The person being referred (or their nominee or guardian) knows about this referral and has agreed to Reach Supports receiving this information.</b></label>
+          <label for="rf-consent"><b style="color:var(--ink)" data-v-other="The person being referred (or their nominee or guardian) knows about this referral and has agreed to Reach Supports receiving this information." data-v-self="I'm happy for Reach Supports to receive this information and to contact me about supports.">The person being referred (or their nominee or guardian) knows about this referral and has agreed to Reach Supports receiving this information.</b></label>
         </div>
 
         <!-- Honeypot: hidden from people, catches bots. Do not remove. -->
@@ -690,15 +691,15 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
       <div class="step" data-reveal>
         <div class="step-num">03</div>
         <div>
-          <h3>We meet them</h3>
-          <p>We arrive with their service agreement and plans already drafted from what you've told us, ready to go through together and change until they're right.</p>
+          <h3 data-v-other="We meet them" data-v-self="We meet you">We meet them</h3>
+          <p data-v-other="We arrive with their service agreement and plans already drafted from what you've told us, ready to go through together and change until they're right." data-v-self="We come to you with your service agreement and plans already drafted from what you've told us, ready to go through together and change until they're right.">We arrive with their service agreement and plans already drafted from what you've told us, ready to go through together and change until they're right.</p>
         </div>
       </div>
       <div class="step" data-reveal>
         <div class="step-num">04</div>
         <div>
           <h3>Supports start</h3>
-          <p>We match workers who suit them, confirm the schedule, and keep you in the loop as things get underway.</p>
+          <p data-v-other="We match workers who suit them, confirm the schedule, and keep you in the loop as things get underway." data-v-self="We match workers who suit you, confirm your schedule, and keep in touch as things get underway.">We match workers who suit them, confirm the schedule, and keep you in the loop as things get underway.</p>
         </div>
       </div>
     </div>
@@ -827,12 +828,23 @@ const form = document.getElementById('referralForm');
 const $ = (id) => document.getElementById(id);
 const val = (name) => ((form.elements[name] && form.elements[name].value) || '').trim();
 
-/* --- self-referral: the participant's own details are the way back --- */
+/* --- self-referral: the participant's own details are the way back, and
+   every question talks to them ("your NDIS plan") instead of about them.
+   Copy that changes carries both versions: data-v-other / data-v-self for
+   text, data-ph-other / data-ph-self for placeholders, data-only for a line
+   that belongs to one voice. --- */
 const roleSelect = $('rf-role');
+const isSelfReferral = () => roleSelect.value === 'Self-referral';
+const applyVoice = (self) => {
+  document.querySelectorAll('[data-v-other]').forEach((el) => { el.textContent = self ? el.dataset.vSelf : el.dataset.vOther; });
+  document.querySelectorAll('[data-ph-other]').forEach((el) => { el.placeholder = self ? el.dataset.phSelf : el.dataset.phOther; });
+  document.querySelectorAll('[data-only]').forEach((el) => { el.hidden = el.dataset.only !== (self ? 'self' : 'other'); });
+};
 const syncSelf = () => {
-  const self = roleSelect.value === 'Self-referral';
+  const self = isSelfReferral();
   $('referrerFields').style.display = self ? 'none' : 'flex';
   $('selfHint').style.display = self ? 'block' : 'none';
+  applyVoice(self);
 };
 roleSelect.addEventListener('change', syncSelf);
 syncSelf();
@@ -987,18 +999,20 @@ function showError(text) {
 function problems() {
   document.querySelectorAll('.field.invalid, .check-row.invalid').forEach((n) => n.classList.remove('invalid'));
   const out = [];
+  const self = isSelfReferral();
   if (!val('firstName') && !val('lastName')) {
-    out.push('Please tell us the name of the person being referred.');
+    out.push(self ? 'Please tell us your name.' : 'Please tell us the name of the person being referred.');
     $('f-firstName').classList.add('invalid'); $('f-lastName').classList.add('invalid');
   }
-  const self = roleSelect.value === 'Self-referral';
   const reachable = [self ? '' : val('referrerEmail'), self ? '' : val('referrerPhone'), val('email'), val('phone')].some(Boolean);
   if (!reachable) {
     out.push('Please give us a phone number or email address so we can get back to you.');
     (self ? ['f-phone', 'f-email'] : ['f-referrerEmail', 'f-referrerPhone']).forEach((id) => $(id).classList.add('invalid'));
   }
   if (!$('rf-consent').checked) {
-    out.push('Please confirm the person has agreed to this referral.');
+    out.push(self
+      ? 'Please tick the box to say you\u2019re happy for us to receive this information.'
+      : 'Please confirm the person has agreed to this referral.');
     $('f-consent').classList.add('invalid');
   }
   return out;
@@ -1034,7 +1048,7 @@ function buildMailto() {
     'Consent to referral confirmed: ' + ($('rf-consent').checked ? 'Yes' : 'No'),
     ...(files.length ? ['', 'Please attach: ' + files.map((f) => f.name).join(', ')] : [])
   ];
-  const subject = 'Referral — ' + [val('firstName'), val('lastName')].join(' ');
+  const subject = 'Referral — ' + [val('firstName'), val('lastName')].join(' ') + (self ? ' (self-referral)' : '');
   return 'mailto:' + FALLBACK_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
 }
 
