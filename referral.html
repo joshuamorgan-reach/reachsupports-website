@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make a Referral — Reach Supports</title>
+<meta name="description" content="Refer someone to Reach Supports for NDIS mental health and community support. Tell us what they're looking for in your own words — anything you don't know yet, just write TBC. A real person will be back in touch within one business day.">
+<link rel="icon" type="image/jpeg" href="assets/rs-monogram.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   REACH SUPPORTS — DESIGN TOKENS  (shared with index.html)
+   ============================================================ */
+:root{
+  --paper:#FAF9F6;
+  --paper-2:#F3EFE7;
+  --ink:#1B211D;
+  --ink-60:rgba(27,33,29,.62);
+  --ink-40:rgba(27,33,29,.40);
+  --ink-12:rgba(27,33,29,.12);
+  --sage:#5F8D74;
+  --sage-deep:#3E6B54;
+  --sage-tint:#E6F0E9;
+  --clay:#D89A6E;
+  --clay-tint:#F6E7D8;
+  --mist:#E4EAF3;
+  --white:#FFFFFF;
+  --alert:#9A3B2E;
+  --alert-tint:#F8E4DF;
+
+  --font-display:"Fraunces",Georgia,serif;
+  --font-body:"Manrope",-apple-system,"Segoe UI",sans-serif;
+
+  --section-pad:clamp(96px,12vw,168px);
+  --gutter:clamp(20px,5vw,64px);
+  --radius-lg:28px;
+  --radius-md:20px;
+  --radius-pill:999px;
+
+  --ease-out:cubic-bezier(.22,.68,0,1);
+  --dur:.9s;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+::selection{background:var(--sage);color:var(--white)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- Typography ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--sage-deep);margin-bottom:28px;
+}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--sage);border-radius:2px}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;line-height:1.06;letter-spacing:-.015em}
+.h-display{font-size:clamp(44px,7.4vw,104px)}
+.h-xl{font-size:clamp(36px,5.4vw,72px)}
+.h-lg{font-size:clamp(28px,3.6vw,46px)}
+.h-md{font-size:clamp(22px,2.4vw,30px);line-height:1.25}
+em.accent{font-style:italic;font-weight:400;color:var(--sage-deep)}
+.lede{font-size:clamp(17px,1.6vw,21px);color:var(--ink-60);max-width:56ch}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--font-body);font-weight:700;font-size:16px;
+  padding:18px 32px;border-radius:var(--radius-pill);
+  border:1.5px solid transparent;cursor:pointer;
+  transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out),background .3s,color .3s,border-color .3s;
+  will-change:transform;
+}
+.btn .arr{transition:transform .45s var(--ease-out);display:inline-block}
+.btn:hover .arr{transform:translateX(5px)}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--sage-deep);transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(62,107,84,.55)}
+.btn-ghost{border-color:var(--ink-12);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-3px)}
+.btn-light{background:var(--paper);color:var(--ink)}
+.btn-light:hover{background:var(--sage-tint);transform:translateY(-3px)}
+.btn-sm{padding:12px 22px;font-size:14px}
+.btn[disabled]{opacity:.55;cursor:progress;transform:none;box-shadow:none}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  transition:background .4s,box-shadow .4s,padding .4s;
+  padding:22px 0;
+}
+.nav.scrolled{
+  background:rgba(250,249,246,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 var(--ink-12);
+  padding:14px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo img{height:34px;width:auto;transition:height .4s}
+.nav.scrolled .nav-logo img{height:28px}
+.nav-links{display:flex;gap:36px;font-size:15px;font-weight:600}
+.nav-links a{position:relative;color:var(--ink-60);transition:color .3s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;
+  background:var(--sage);border-radius:2px;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease-out);
+}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* ---------- Hero (compact, page variant) ---------- */
+.hero{
+  position:relative;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:clamp(150px,18vh,210px) 0 clamp(40px,6vh,72px);overflow:hidden;
+}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;will-change:transform}
+.blob-1{width:560px;height:560px;background:var(--sage-tint);top:-120px;right:-140px}
+.blob-2{width:460px;height:460px;background:var(--clay-tint);top:30%;left:-180px}
+.hero-inner{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero .eyebrow{justify-content:center}
+.hero .eyebrow::before{display:none}
+.hero h1{max-width:18ch}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .w>span{display:inline-block;transform:translateY(115%);animation:riseUp 1.1s var(--ease-out) forwards;animation-delay:var(--d,0s)}
+@keyframes riseUp{to{transform:translateY(0)}}
+.hero .lede{margin:30px auto 40px;opacity:0;animation:fadeUp 1s var(--ease-out) .55s forwards;max-width:56ch}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 1s var(--ease-out) .7s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* ---------- Reveal-on-scroll ---------- */
+[data-reveal]{opacity:0;transform:translateY(44px);transition:opacity var(--dur) var(--ease-out),transform var(--dur) var(--ease-out);transition-delay:var(--d,0s)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ---------- Sections shared ---------- */
+section{padding:var(--section-pad) 0}
+.sec-head{max-width:760px;margin-bottom:clamp(48px,6vw,84px)}
+.sec-head .lede{margin-top:22px}
+
+/* ---------- Promises row ---------- */
+.promise-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.promise-card{
+  background:var(--white);border:1px solid var(--ink-12);border-radius:var(--radius-lg);
+  padding:34px 30px;display:flex;flex-direction:column;gap:12px;min-height:200px;
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out),border-color .3s;
+}
+.promise-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px rgba(27,33,29,.22);border-color:transparent}
+.promise-card .glyph{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:22px;margin-bottom:6px}
+.promise-card:nth-child(4n+1) .glyph{background:var(--sage-tint)}
+.promise-card:nth-child(4n+2) .glyph{background:var(--clay-tint)}
+.promise-card:nth-child(4n+3) .glyph{background:var(--mist)}
+.promise-card:nth-child(4n) .glyph{background:var(--sage-tint)}
+.promise-card h3{font-size:19px;line-height:1.3}
+.promise-card p{font-size:14.5px;color:var(--ink-60)}
+
+/* ---------- The referral form ---------- */
+.form-sec{padding-top:clamp(60px,9vh,110px)}
+.form-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:clamp(32px,5vw,72px);align-items:start}
+.form-aside{position:sticky;top:120px}
+.form-aside .lede{margin-bottom:28px}
+.form-points{list-style:none;display:flex;flex-direction:column;gap:16px}
+.form-points li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:var(--ink-60)}
+.form-points .ico{flex:none;width:24px;height:24px;border-radius:50%;background:var(--sage-tint);color:var(--sage-deep);display:grid;place-items:center;font-size:12px;margin-top:1px;font-weight:700}
+.form-points a{color:var(--sage-deep);font-weight:700;border-bottom:1.5px solid var(--sage)}
+.form-points a:hover{color:var(--ink)}
+
+.referral-form{display:flex;flex-direction:column;gap:22px}
+.part{
+  background:var(--paper-2);border-radius:var(--radius-lg);padding:clamp(22px,3vw,36px);
+  display:flex;flex-direction:column;gap:16px;border:0;min-width:0;
+}
+.part-head{display:flex;gap:14px;align-items:flex-start}
+.part-num{
+  flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--sage);
+  display:grid;place-items:center;font-family:var(--font-display);font-style:italic;
+  font-size:15px;color:var(--sage-deep);background:var(--white);
+}
+.part-head h3{font-size:clamp(22px,2.2vw,28px);line-height:1.2}
+.part-head p{font-size:14.5px;color:var(--ink-60);margin-top:4px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.field label{font-size:12.5px;font-weight:800;letter-spacing:.02em;color:var(--ink-60)}
+.field .opt{font-weight:400;color:var(--ink-40)}
+.field input,.field select,.field textarea{
+  font-family:inherit;font-size:16px;color:var(--ink);background:var(--paper);
+  border:1.5px solid var(--ink-12);border-radius:var(--radius-md);padding:14px 16px;width:100%;
+  transition:border-color .3s,box-shadow .3s;
+}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 4px var(--sage-tint)}
+.field .hint{font-size:13px;color:var(--ink-40);line-height:1.5}
+.field.invalid input,.field.invalid textarea{border-color:var(--alert)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.tbc{
+  font-family:inherit;font-size:11.5px;font-weight:800;letter-spacing:.06em;
+  padding:5px 11px;border-radius:var(--radius-pill);cursor:pointer;
+  border:1.5px solid var(--ink-12);background:var(--paper);color:var(--ink-60);
+  transition:background .25s,color .25s,border-color .25s;
+}
+.tbc:hover{border-color:var(--sage)}
+.tbc[aria-pressed="true"]{background:var(--clay-tint);border-color:var(--clay);color:#7A4A28}
+.check-row{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--ink-60);line-height:1.55}
+.check-row input{margin-top:3px;width:18px;height:18px;accent-color:var(--sage);flex:none;cursor:pointer}
+.check-row label{cursor:pointer}
+
+/* the line-item helper */
+.helper{background:var(--white);border:1px solid var(--ink-12);border-radius:var(--radius-md);padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.helper-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.helper-top p{font-size:14px;color:var(--ink-60);max-width:48ch}
+.helper-status{font-size:14px;color:var(--ink-60)}
+.helper-status.error{color:var(--alert)}
+.suggest-list{display:flex;flex-direction:column;gap:10px}
+.suggest{border-top:1px solid var(--ink-12);padding-top:10px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px}
+.suggest:first-child{border-top:0;padding-top:0}
+.suggest .quote{font-style:italic;font-size:15px}
+.suggest .when{font-size:13px;color:var(--ink-60)}
+.suggest .item{font-size:13.5px;color:var(--sage-deep);font-weight:700}
+.suggest .code{font-size:12px;color:var(--ink-40);font-weight:600}
+.suggest .hours{font-size:13px;color:var(--ink-60);text-align:right;white-space:nowrap}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:var(--radius-pill);background:var(--clay-tint);color:#7A4A28;vertical-align:middle}
+.confirm-list{font-size:13.5px;color:var(--ink-60);padding-left:18px;list-style:disc}
+
+/* documents */
+.file-drop{
+  display:flex;flex-direction:column;gap:8px;align-items:flex-start;
+  border:1.5px dashed var(--ink-12);border-radius:var(--radius-md);padding:18px;background:var(--paper);
+}
+.file-drop input[type=file]{font-size:14px}
+.file-list{display:flex;flex-direction:column;gap:6px;width:100%}
+.file-item{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;background:var(--white);border-radius:12px;padding:8px 12px}
+.file-item .name{overflow-wrap:anywhere}
+.file-item button{font-family:inherit;font-size:12px;font-weight:700;border:0;background:none;color:var(--alert);cursor:pointer}
+.file-item .state{font-size:12.5px;color:var(--ink-40);white-space:nowrap}
+
+.submit-row{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.form-note{font-size:13px;color:var(--ink-40);line-height:1.6}
+.form-msg{
+  font-size:15px;font-weight:700;display:none;line-height:1.6;
+  border-radius:var(--radius-md);padding:16px 18px;width:100%;
+}
+.form-msg.show{display:block}
+.form-msg.ok{color:var(--sage-deep);background:var(--sage-tint)}
+.form-msg.error{color:var(--alert);background:var(--alert-tint)}
+.form-msg .ref{font-family:var(--font-display);font-size:22px;font-weight:500;display:block;margin:4px 0}
+.privacy-line{font-size:13px;color:var(--ink-40);line-height:1.6}
+
+/* ---------- What happens next ---------- */
+.process-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,7vw,110px);align-items:start}
+.process-sticky{position:sticky;top:140px}
+.process-sticky .lede{margin-top:22px}
+.step{display:grid;grid-template-columns:64px 1fr;gap:26px;padding:44px 0;border-bottom:1px solid var(--ink-12)}
+.step:first-child{padding-top:8px}
+.step-num{
+  width:52px;height:52px;border-radius:50%;border:1.5px solid var(--sage);
+  display:grid;place-items:center;font-family:var(--font-display);font-style:italic;
+  font-size:17px;color:var(--sage-deep);background:var(--white);
+}
+.step h3{font-size:24px;margin-bottom:10px}
+.step p{color:var(--ink-60);font-size:16px}
+
+/* ---------- Footer ---------- */
+footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,246,.6);padding:72px 0 44px}
+.foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.foot-logo img{height:40px;filter:invert(1);opacity:.95}
+.foot-tag{font-size:13px;margin-top:16px;max-width:34ch;line-height:1.7}
+.foot-col h4{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,249,246,.4);margin-bottom:18px;font-family:var(--font-body);font-weight:700}
+.foot-col a{display:block;font-size:15px;color:rgba(250,249,246,.75);margin-bottom:12px;transition:color .3s}
+.foot-col a:hover{color:#B8D8C4}
+.foot-base{border-top:1px solid rgba(250,249,246,.12);margin-top:56px;padding-top:28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:rgba(250,249,246,.4)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .promise-grid{grid-template-columns:repeat(2,1fr)}
+  .process-grid,.form-layout{grid-template-columns:1fr}
+  .process-sticky,.form-aside{position:static}
+}
+@media (max-width:680px){
+  .nav-links{display:none}
+  .promise-grid{grid-template-columns:1fr}
+  .field-row,.field-row-3{grid-template-columns:1fr}
+  .btn{padding:16px 26px;font-size:15px}
+  .suggest{grid-template-columns:1fr}
+  .suggest .hours{text-align:left}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+  .hero h1 .w>span{transform:none}
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="/" aria-label="Reach Supports home">
+      <img src="assets/logo-black.png" alt="Reach Supports — Mental Health Community Services">
+    </a>
+    <div class="nav-links">
+      <a href="/#who">Who we support</a>
+      <a href="/#what">What we do</a>
+      <a href="/#approach">Our approach</a>
+      <a href="/#partners">Referrals</a>
+      <a href="/#contact">Contact</a>
+    </div>
+    <a href="#form" class="btn btn-primary btn-sm">Make a referral <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero" id="top">
+  <div class="blob blob-1" data-parallax="0.25"></div>
+  <div class="blob blob-2" data-parallax="-0.15"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow" style="opacity:0;animation:fadeUp 1s var(--ease-out) .1s forwards">Make a referral</span>
+    <h1 class="h-display" id="heroTitle">Refer someone to <em class="accent">Reach.</em></h1>
+    <p class="lede">Tell us who you're referring and what they're looking for, in your own words. Anything you don't know yet, just write TBC — we'll work the rest out together. A real person will be back in touch within one business day.</p>
+    <div class="hero-ctas">
+      <a href="#form" class="btn btn-primary">Start the referral <span class="arr">→</span></a>
+      <a href="#process" class="btn btn-ghost">What happens next</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== PROMISES ==================== -->
+<section id="promises" style="padding-top:clamp(20px,3vh,40px)">
+  <div class="wrap">
+    <div class="promise-grid">
+      <article class="promise-card" data-reveal style="--d:0s">
+        <div class="glyph">🕑</div>
+        <h3>Back to you within a business day</h3>
+        <p>A member of our management team reads every referral and calls or emails you — not an auto-reply.</p>
+      </article>
+      <article class="promise-card" data-reveal style="--d:.08s">
+        <div class="glyph">✍️</div>
+        <h3>Your words are perfect</h3>
+        <p>No codes or jargon needed. Describe the days, times and help they're after however it makes sense to you.</p>
+      </article>
+      <article class="promise-card" data-reveal style="--d:.16s">
+        <div class="glyph">❓</div>
+        <h3>TBC is a fine answer</h3>
+        <p>Don't have the plan dates or budget to hand? Tap TBC and send it anyway — we'll confirm everything together.</p>
+      </article>
+      <article class="promise-card" data-reveal style="--d:.24s">
+        <div class="glyph">📎</div>
+        <h3>Attach what you have</h3>
+        <p>NDIS plans, goals, reports or letters help us arrive prepared. They go straight into a secure file, not an inbox.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FORM ==================== -->
+<section class="form-sec" id="form">
+  <div class="wrap form-layout">
+    <aside class="form-aside">
+      <span class="eyebrow" data-reveal>The referral form</span>
+      <h2 class="h-xl" data-reveal style="--d:.08s">About five <em class="accent">minutes.</em></h2>
+      <p class="lede" data-reveal style="--d:.16s">Fill in what you can. Only the participant's name, a way to reach you, and their agreement to the referral are needed to send it.</p>
+      <ul class="form-points" data-reveal style="--d:.24s">
+        <li><span class="ico">✉</span><div>Prefer email? Send the details to <a href="mailto:referrals@reachsupports.com">referrals@reachsupports.com</a></div></li>
+        <li><span class="ico">✨</span><div>Not sure which NDIS supports fit? Describe what they need and use <b>Match to NDIS line items</b> — it's optional, and everything stays to be confirmed.</div></li>
+        <li><span class="ico">🔒</span><div>Everything you send goes to a secure client-management system, seen only by the people arranging supports.</div></li>
+      </ul>
+    </aside>
+
+    <form class="referral-form" id="referralForm" novalidate>
+
+      <!-- 1. About you -->
+      <fieldset class="part" data-reveal>
+        <div class="part-head">
+          <span class="part-num">01</span>
+          <div>
+            <h3>About you</h3>
+            <p>So we know who to get back to.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="rf-role">I'm making this referral as</label>
+          <select id="rf-role" name="referrerRole">
+            <option value="">Please choose…</option>
+            <option>Support Coordinator</option>
+            <option>Family member or carer</option>
+            <option>Health professional</option>
+            <option>Plan manager</option>
+            <option>Advocate, guardian or nominee</option>
+            <option value="Self-referral">The participant — I'm referring myself</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div id="referrerFields" style="display:flex;flex-direction:column;gap:16px">
+          <div class="field-row">
+            <div class="field" id="f-referrerName">
+              <label for="rf-name">Your name</label>
+              <input id="rf-name" name="referrerName" type="text" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="rf-org">Organisation <span class="opt">(if any)</span></label>
+              <input id="rf-org" name="referrerOrganisation" type="text" autocomplete="organization">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field" id="f-referrerEmail">
+              <label for="rf-email">Your email</label>
+              <input id="rf-email" name="referrerEmail" type="email" autocomplete="email">
+            </div>
+            <div class="field" id="f-referrerPhone">
+              <label for="rf-phone">Your phone</label>
+              <input id="rf-phone" name="referrerPhone" type="tel" autocomplete="tel">
+            </div>
+          </div>
+        </div>
+        <p class="hint" id="selfHint" style="display:none;font-size:14px;color:var(--ink-60)">Thanks for reaching out yourself — we'll use the contact details you give in the next section.</p>
+      </fieldset>
+
+      <!-- 2. The participant -->
+      <fieldset class="part" data-reveal>
+        <div class="part-head">
+          <span class="part-num">02</span>
+          <div>
+            <h3>The person being referred</h3>
+            <p>Their details as they appear on their NDIS plan, if you have them.</p>
+          </div>
+        </div>
+        <div class="field-row-3">
+          <div class="field" id="f-firstName">
+            <label for="rf-first">First name</label>
+            <input id="rf-first" name="firstName" type="text" autocomplete="off">
+          </div>
+          <div class="field" id="f-lastName">
+            <label for="rf-last">Last name</label>
+            <input id="rf-last" name="lastName" type="text" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="rf-pref">Goes by <span class="opt">(optional)</span></label>
+            <input id="rf-pref" name="preferredName" type="text" autocomplete="off">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="rf-dob">Date of birth <span class="opt">(optional)</span></label>
+            <input id="rf-dob" name="dob" type="date">
+          </div>
+          <div class="field">
+            <label for="rf-ndis">NDIS number <span class="opt">(optional)</span></label>
+            <input id="rf-ndis" name="ndisNumber" type="text" inputmode="numeric" autocomplete="off" placeholder="9 digits">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field" id="f-phone">
+            <label for="rf-pphone">Their phone <span class="opt">(optional)</span></label>
+            <input id="rf-pphone" name="phone" type="tel" autocomplete="off">
+          </div>
+          <div class="field" id="f-email">
+            <label for="rf-pemail">Their email <span class="opt">(optional)</span></label>
+            <input id="rf-pemail" name="email" type="email" autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <label for="rf-address">Their address or suburb <span class="opt">(optional)</span></label>
+          <input id="rf-address" name="address" type="text" autocomplete="off">
+        </div>
+      </fieldset>
+
+      <!-- 3. NDIS plan -->
+      <fieldset class="part" data-reveal>
+        <div class="part-head">
+          <span class="part-num">03</span>
+          <div>
+            <h3>Their NDIS plan</h3>
+            <p>Leave anything you don't know blank.</p>
+          </div>
+        </div>
+        <div class="field-row-3">
+          <div class="field">
+            <label for="rf-pstart">Plan start</label>
+            <input id="rf-pstart" name="planStartDate" type="date">
+          </div>
+          <div class="field">
+            <label for="rf-pend">Plan end</label>
+            <input id="rf-pend" name="planEndDate" type="date">
+          </div>
+          <div class="field">
+            <label for="rf-funding">Funding managed by</label>
+            <select id="rf-funding" name="fundingManagement">
+              <option value="">Please choose…</option>
+              <option value="plan_managed">A plan manager</option>
+              <option value="self_managed">Self-managed</option>
+              <option value="ndia_managed">The NDIA (agency managed)</option>
+              <option value="unsure">Not sure</option>
+            </select>
+            <span class="hint">We support participants whose funding is plan-managed or self-managed.</span>
+          </div>
+        </div>
+        <div class="field-row-3">
+          <div class="field">
+            <label for="rf-pmname">Plan manager</label>
+            <input id="rf-pmname" name="planManagerName" type="text" autocomplete="off" placeholder="Organisation">
+          </div>
+          <div class="field">
+            <label for="rf-pmemail">Plan manager email</label>
+            <input id="rf-pmemail" name="planManagerEmail" type="email" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="rf-pmphone">Plan manager phone</label>
+            <input id="rf-pmphone" name="planManagerPhone" type="tel" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 4. Supports -->
+      <fieldset class="part" data-reveal>
+        <div class="part-head">
+          <span class="part-num">04</span>
+          <div>
+            <h3>What supports are they looking for?</h3>
+            <p>In plain English, as best you can. Tap TBC for anything still to be worked out.</p>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-top">
+            <label for="rf-supports">Days, times and hours a week</label>
+            <button type="button" class="tbc" data-tbc="rf-supports" aria-pressed="false">TBC</button>
+          </div>
+          <textarea id="rf-supports" name="supportsWanted" placeholder="e.g. Mondays and Fridays, late morning — about 6 hours a week. Maybe a Saturday outing every second week."></textarea>
+        </div>
+        <div class="field">
+          <div class="field-top">
+            <label for="rf-types">Type of support</label>
+            <button type="button" class="tbc" data-tbc="rf-types" aria-pressed="false">TBC</button>
+          </div>
+          <textarea id="rf-types" name="supportTypes" style="min-height:90px" placeholder="e.g. Help keeping on top of cleaning and cooking, getting to appointments, and getting out to meet people."></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <div class="field-top">
+              <label for="rf-start">Preferred start date</label>
+              <button type="button" class="tbc" data-tbc="rf-start" aria-pressed="false">TBC</button>
+            </div>
+            <input id="rf-start" name="preferredStart" type="text" placeholder="e.g. As soon as possible, or early October">
+          </div>
+          <div class="field">
+            <div class="field-top">
+              <label for="rf-budget">Core budget available</label>
+              <button type="button" class="tbc" data-tbc="rf-budget" aria-pressed="false">TBC</button>
+            </div>
+            <input id="rf-budget" name="coreBudget" type="text" placeholder="e.g. About $35,000 core for the plan year">
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-top">
+            <label for="rf-travel">Travel and transport needs</label>
+            <button type="button" class="tbc" data-tbc="rf-travel" aria-pressed="false">TBC</button>
+          </div>
+          <textarea id="rf-travel" name="travelNeeds" style="min-height:80px" placeholder="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week."></textarea>
+        </div>
+
+        <div class="helper" id="helper">
+          <div class="helper-top">
+            <p><b>Optional:</b> match what you've written to the NDIS support items we'd use. Suggestions only — nothing is booked or quoted until we've spoken with you.</p>
+            <button type="button" class="btn btn-ghost btn-sm" id="matchBtn">✨ Match to NDIS line items</button>
+          </div>
+          <div class="helper-status" id="helperStatus" role="status" aria-live="polite"></div>
+          <div id="suggestion" hidden>
+            <div class="suggest-list" id="suggestList"></div>
+            <div id="confirmWrap" hidden>
+              <p style="font-size:13.5px;font-weight:700;margin-top:4px">Still to confirm</p>
+              <ul class="confirm-list" id="confirmList"></ul>
+            </div>
+            <div class="check-row" style="margin-top:8px">
+              <input type="checkbox" id="rf-include" checked>
+              <label for="rf-include">Send these suggestions with the referral <span class="tag">To be confirmed</span></label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 5. About them -->
+      <fieldset class="part" data-reveal>
+        <div class="part-head">
+          <span class="part-num">05</span>
+          <div>
+            <h3>About them</h3>
+            <p>Whatever will help us support them well from the first visit.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="rf-about">Anything else we should know? <span class="opt">(optional)</span></label>
+          <textarea id="rf-about" name="aboutParticipant" style="min-height:140px" placeholder="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate."></textarea>
+        </div>
+        <div class="field-row-3">
+          <div class="field">
+            <label for="rf-ecname">Emergency contact <span class="opt">(optional)</span></label>
+            <input id="rf-ecname" name="emergencyContactName" type="text" autocomplete="off" placeholder="Name">
+          </div>
+          <div class="field">
+            <label for="rf-ecrel">Relationship</label>
+            <input id="rf-ecrel" name="emergencyContactRelationship" type="text" autocomplete="off" placeholder="e.g. Sister">
+          </div>
+          <div class="field">
+            <label for="rf-ecphone">Their phone</label>
+            <input id="rf-ecphone" name="emergencyContactPhone" type="tel" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 6. Documents -->
+      <fieldset class="part" data-reveal>
+        <div class="part-head">
+          <span class="part-num">06</span>
+          <div>
+            <h3>Documents <span class="opt" style="font-family:var(--font-body);font-size:15px;color:var(--ink-40)">(optional)</span></h3>
+            <p>NDIS plan or goals, reports, letters — PDFs, Word documents or photos, up to 10 files of 10&nbsp;MB each.</p>
+          </div>
+        </div>
+        <div class="file-drop">
+          <input type="file" id="rf-files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.heic,.heif,.webp,.rtf,.txt,.odt,.xls,.xlsx">
+          <div class="file-list" id="fileList"></div>
+        </div>
+      </fieldset>
+
+      <!-- 7. Consent + send -->
+      <fieldset class="part" data-reveal>
+        <div class="check-row" id="f-consent">
+          <input type="checkbox" id="rf-consent" name="consent">
+          <label for="rf-consent"><b style="color:var(--ink)">The person being referred (or their nominee or guardian) knows about this referral and has agreed to Reach Supports receiving this information.</b></label>
+        </div>
+
+        <!-- Honeypot: hidden from people, catches bots. Do not remove. -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+          <label for="rf-company">Company (leave this blank)</label>
+          <input id="rf-company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="submit-row">
+          <div class="form-msg error" id="formError" role="alert"></div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Send the referral <span class="arr">→</span></button>
+          <p class="form-note">Your referral is sent securely to the Reach Supports team. If anything goes wrong, your email app will open as a backup so nothing is lost.</p>
+          <div class="form-msg ok" id="formOk" role="status" aria-live="polite"></div>
+        </div>
+        <p class="privacy-line">We only use this information to respond to the referral and arrange supports, and share it only with the people involved in doing that — in line with the Australian Privacy Principles and the NDIS Practice Standards.</p>
+      </fieldset>
+    </form>
+  </div>
+</section>
+
+<!-- ==================== WHAT HAPPENS NEXT ==================== -->
+<section id="process">
+  <div class="wrap process-grid">
+    <div class="process-sticky">
+      <span class="eyebrow" data-reveal>After you hit send</span>
+      <h2 class="h-xl" data-reveal style="--d:.08s">What happens <em class="accent">next.</em></h2>
+      <p class="lede" data-reveal style="--d:.16s">No black box — here's how a referral becomes supports that fit.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step" data-reveal>
+        <div class="step-num">01</div>
+        <div>
+          <h3>We read it properly</h3>
+          <p>Your referral and any documents land in our secure system, and a manager reads everything you've sent.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">02</div>
+        <div>
+          <h3>We get back to you</h3>
+          <p>Within one business day, to talk through what's needed, fill in any TBCs and check we're the right fit.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">03</div>
+        <div>
+          <h3>We meet them</h3>
+          <p>We arrive with their service agreement and plans already drafted from what you've told us, ready to go through together and change until they're right.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="step-num">04</div>
+        <div>
+          <h3>Supports start</h3>
+          <p>We match workers who suit them, confirm the schedule, and keep you in the loop as things get underway.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-logo">
+        <img src="assets/logo-black.png" alt="Reach Supports">
+        <p class="foot-tag">NDIS mental health &amp; community support. Genuine relationships, everyday independence.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="/#who">Who we support</a>
+        <a href="/#what">What we do</a>
+        <a href="/#approach">Our approach</a>
+        <a href="/#partners">Referral partners</a>
+      </div>
+      <div class="foot-col">
+        <h4>Referrals</h4>
+        <a href="mailto:referrals@reachsupports.com">referrals@reachsupports.com</a>
+        <a href="#form">Make a referral</a>
+        <a href="/feedback.html">Feedback &amp; complaints</a>
+      </div>
+      <div class="foot-col">
+        <h4>Acknowledgement</h4>
+        <p style="font-size:13.5px;max-width:32ch;line-height:1.7">We acknowledge the Traditional Custodians of the lands on which we work, and pay our respects to Elders past and present.</p>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Reach Supports. All rights reserved.</span>
+      <span>Mental Health Community Services</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* --- Hero headline: split words for staggered rise --- */
+(() => {
+  const h = document.getElementById('heroTitle');
+  if (!h || prefersReduced) return;
+  const splitNode = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        const w = document.createElement('span'); w.className = 'w';
+        const inner = document.createElement('span'); inner.textContent = part;
+        w.appendChild(inner); frag.appendChild(w);
+      });
+      node.replaceWith(frag);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      [...node.childNodes].forEach(splitNode);
+    }
+  };
+  [...h.childNodes].forEach(splitNode);
+  h.querySelectorAll('.w > span').forEach((s, i) => s.style.setProperty('--d', (0.08 + i * 0.07) + 's'));
+})();
+
+/* --- Reveal on scroll --- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+/* --- Nav state --- */
+const nav = document.getElementById('nav');
+const onScrollNav = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+onScrollNav();
+window.addEventListener('scroll', onScrollNav, { passive: true });
+
+/* --- Gentle parallax on hero blobs --- */
+if (!prefersReduced) {
+  const pEls = [...document.querySelectorAll('[data-parallax]')];
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      pEls.forEach(el => { el.style.transform = `translateY(${y * parseFloat(el.dataset.parallax)}px)`; });
+      ticking = false;
+    });
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   Referral form → Reach Supports portal (docs/REFERRAL-INTAKE.md in the portal repo)
+
+   1. POST /public/referrals        the referral → a reference + a short-lived upload token
+   2. POST /public/referrals/files  each document, one request each, with that token
+   3. POST /public/referrals/assist optional: plain English → suggested NDIS line items
+
+   Nothing a visitor or the helper sends back is ever written into the page as
+   HTML — every dynamic string goes in with textContent.
+   ========================================================================== */
+
+// The production API. Only when the page itself is served from localhost can
+// ?api=staging, or ?api=<port> for a local API, point it elsewhere for testing;
+// the live site ignores the parameter, so a crafted link can never send a
+// referral anywhere but Reach.
+const API_BASES = {
+  prod: 'https://reach-api-prod-633869031029.australia-southeast1.run.app',
+  staging: 'https://reach-api-staging-bco2hytd5q-ts.a.run.app'
+};
+const API_BASE = (() => {
+  const onDevMachine = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  const wanted = new URLSearchParams(window.location.search).get('api') || '';
+  if (!onDevMachine) return API_BASES.prod;
+  if (API_BASES[wanted]) return API_BASES[wanted];
+  if (/^\d{4,5}$/.test(wanted)) return 'http://localhost:' + wanted;
+  return API_BASES.prod;
+})();
+const FALLBACK_EMAIL = 'referrals@reachsupports.com';
+const MAX_FILES = 10;
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
+
+const form = document.getElementById('referralForm');
+const $ = (id) => document.getElementById(id);
+const val = (name) => ((form.elements[name] && form.elements[name].value) || '').trim();
+
+/* --- self-referral: the participant's own details are the way back --- */
+const roleSelect = $('rf-role');
+const syncSelf = () => {
+  const self = roleSelect.value === 'Self-referral';
+  $('referrerFields').style.display = self ? 'none' : 'flex';
+  $('selfHint').style.display = self ? 'block' : 'none';
+};
+roleSelect.addEventListener('change', syncSelf);
+syncSelf();
+
+/* --- TBC toggles --- */
+document.querySelectorAll('.tbc').forEach((btn) => {
+  const input = $(btn.dataset.tbc);
+  const sync = () => btn.setAttribute('aria-pressed', /^tbc$/i.test(input.value.trim()) ? 'true' : 'false');
+  btn.addEventListener('click', () => {
+    input.value = btn.getAttribute('aria-pressed') === 'true' ? '' : 'TBC';
+    sync();
+    input.dispatchEvent(new Event('input'));
+  });
+  input.addEventListener('input', sync);
+});
+
+/* --- documents --- */
+let files = [];
+const fileInput = $('rf-files');
+const sizeLabel = (b) => b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB';
+const renderFiles = (states) => {
+  const list = $('fileList');
+  list.replaceChildren();
+  files.forEach((f, i) => {
+    const row = document.createElement('div'); row.className = 'file-item';
+    const name = document.createElement('span'); name.className = 'name';
+    name.textContent = f.name + ' · ' + sizeLabel(f.size);
+    row.appendChild(name);
+    if (states && states[i]) {
+      const s = document.createElement('span'); s.className = 'state'; s.textContent = states[i];
+      row.appendChild(s);
+    } else {
+      const rm = document.createElement('button'); rm.type = 'button'; rm.textContent = 'Remove';
+      rm.addEventListener('click', () => { files.splice(i, 1); renderFiles(); });
+      row.appendChild(rm);
+    }
+    list.appendChild(row);
+  });
+};
+fileInput.addEventListener('change', () => {
+  const problems = [];
+  for (const f of fileInput.files) {
+    if (files.length >= MAX_FILES) { problems.push('Only ' + MAX_FILES + ' documents can be attached — email any others.'); break; }
+    if (f.size > MAX_FILE_BYTES) { problems.push(f.name + ' is over 10 MB — please email it to ' + FALLBACK_EMAIL + '.'); continue; }
+    if (!files.some((x) => x.name === f.name && x.size === f.size)) files.push(f);
+  }
+  fileInput.value = '';
+  renderFiles();
+  showError(problems.join(' '));
+});
+
+/* --- the line-item helper --- */
+let suggestion = null;
+let suggestionSignature = null;
+const helperStatus = $('helperStatus');
+const setHelperStatus = (text, isError) => {
+  helperStatus.textContent = text || '';
+  helperStatus.classList.toggle('error', !!isError);
+};
+['rf-supports', 'rf-types', 'rf-travel'].forEach((id) => $(id).addEventListener('input', () => {
+  if (suggestion) setHelperStatus('You’ve changed the description since matching — match again to refresh the suggestions.');
+}));
+
+$('matchBtn').addEventListener('click', async () => {
+  const body = {
+    supportsWanted: val('supportsWanted'),
+    supportTypes: val('supportTypes'),
+    travelNeeds: val('travelNeeds'),
+    preferredStart: val('preferredStart'),
+    coreBudget: val('coreBudget')
+  };
+  if (![body.supportsWanted, body.supportTypes, body.travelNeeds].some((v) => v && !/^tbc$/i.test(v))) {
+    setHelperStatus('Describe the supports above first — even roughly is fine.', true);
+    return;
+  }
+  const btn = $('matchBtn');
+  btn.disabled = true;
+  setHelperStatus('Matching to NDIS support items…');
+  try {
+    const res = await fetch(API_BASE + '/public/referrals/assist', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) {
+      setHelperStatus((data && (data.error || data.message)) || 'The matcher is unavailable right now. Your description is all we need — just send the referral.', true);
+      return;
+    }
+    suggestion = data.suggestion;
+    suggestionSignature = data.signature;
+    renderSuggestion();
+    setHelperStatus('');
+  } catch (err) {
+    setHelperStatus('The matcher is unavailable right now. Your description is all we need — just send the referral.', true);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+const el = (tag, className, text) => {
+  const n = document.createElement(tag);
+  if (className) n.className = className;
+  if (text !== undefined && text !== null) n.textContent = text;
+  return n;
+};
+
+function renderSuggestion() {
+  const list = $('suggestList');
+  list.replaceChildren();
+  const rows = [...(suggestion.lines || [])];
+  if (suggestion.travel) {
+    rows.push({
+      quote: 'Travel',
+      when: suggestion.travel.kmPerWeek ? 'About ' + suggestion.travel.kmPerWeek + ' km a week' : 'Kilometres to confirm',
+      hoursPerWeek: null,
+      itemNumber: suggestion.travel.itemNumber,
+      itemName: suggestion.travel.itemName,
+      match: 'matched'
+    });
+  }
+  if (!rows.length) {
+    list.appendChild(el('p', 'helper-status', 'We couldn’t match that to specific items — that’s fine, your description is what we’ll work from.'));
+  }
+  rows.forEach((l) => {
+    const row = el('div', 'suggest');
+    const left = el('div');
+    left.appendChild(el('div', 'quote', l.quote === 'Travel' ? 'Travel' : '“' + l.quote + '”'));
+    left.appendChild(el('div', 'when', l.when));
+    if (l.itemNumber) {
+      left.appendChild(el('div', 'item', (l.itemName || 'NDIS support item') + (l.match === 'check' ? ' (best guess)' : '')));
+      left.appendChild(el('div', 'code', l.itemNumber));
+    } else {
+      left.appendChild(el('div', 'when', 'We’ll find the right support item with you.'));
+    }
+    row.appendChild(left);
+    row.appendChild(el('div', 'hours', l.hoursPerWeek ? l.hoursPerWeek + ' hrs/wk' : ''));
+    list.appendChild(row);
+  });
+  const confirm = $('confirmList');
+  confirm.replaceChildren();
+  (suggestion.toConfirm || []).forEach((t) => confirm.appendChild(el('li', null, t)));
+  $('confirmWrap').hidden = !(suggestion.toConfirm || []).length;
+  $('rf-include').checked = true;
+  $('suggestion').hidden = false;
+}
+
+/* --- validation --- */
+const formError = $('formError');
+function showError(text) {
+  formError.textContent = text || '';
+  formError.classList.toggle('show', !!text);
+}
+function problems() {
+  document.querySelectorAll('.field.invalid, .check-row.invalid').forEach((n) => n.classList.remove('invalid'));
+  const out = [];
+  if (!val('firstName') && !val('lastName')) {
+    out.push('Please tell us the name of the person being referred.');
+    $('f-firstName').classList.add('invalid'); $('f-lastName').classList.add('invalid');
+  }
+  const self = roleSelect.value === 'Self-referral';
+  const reachable = [self ? '' : val('referrerEmail'), self ? '' : val('referrerPhone'), val('email'), val('phone')].some(Boolean);
+  if (!reachable) {
+    out.push('Please give us a phone number or email address so we can get back to you.');
+    (self ? ['f-phone', 'f-email'] : ['f-referrerEmail', 'f-referrerPhone']).forEach((id) => $(id).classList.add('invalid'));
+  }
+  if (!$('rf-consent').checked) {
+    out.push('Please confirm the person has agreed to this referral.');
+    $('f-consent').classList.add('invalid');
+  }
+  return out;
+}
+
+/* --- email fallback: nothing is ever lost if the portal can't be reached --- */
+function buildMailto() {
+  const self = roleSelect.value === 'Self-referral';
+  const lines = [
+    'Referral from the Reach Supports website form (the online form could not be reached).',
+    '',
+    'REFERRER',
+    'Referring as: ' + (roleSelect.value || '(not stated)'),
+    ...(self ? [] : ['Name: ' + val('referrerName'), 'Organisation: ' + val('referrerOrganisation'), 'Email: ' + val('referrerEmail'), 'Phone: ' + val('referrerPhone')]),
+    '',
+    'PARTICIPANT',
+    'Name: ' + [val('firstName'), val('lastName')].join(' ') + (val('preferredName') ? ' (goes by ' + val('preferredName') + ')' : ''),
+    'Date of birth: ' + val('dob'), 'NDIS number: ' + val('ndisNumber'),
+    'Phone: ' + val('phone'), 'Email: ' + val('email'), 'Address: ' + val('address'),
+    '',
+    'NDIS PLAN',
+    'Plan: ' + val('planStartDate') + ' to ' + val('planEndDate'), 'Funding managed by: ' + val('fundingManagement'),
+    'Plan manager: ' + [val('planManagerName'), val('planManagerEmail'), val('planManagerPhone')].filter(Boolean).join(' · '),
+    '',
+    'SUPPORTS WANTED',
+    'Days, times, hours: ' + val('supportsWanted'), 'Type of support: ' + val('supportTypes'),
+    'Preferred start: ' + val('preferredStart'), 'Core budget: ' + val('coreBudget'), 'Travel: ' + val('travelNeeds'),
+    '',
+    'ABOUT THEM',
+    val('aboutParticipant'),
+    'Emergency contact: ' + [val('emergencyContactName'), val('emergencyContactRelationship'), val('emergencyContactPhone')].filter(Boolean).join(' · '),
+    '',
+    'Consent to referral confirmed: ' + ($('rf-consent').checked ? 'Yes' : 'No'),
+    ...(files.length ? ['', 'Please attach: ' + files.map((f) => f.name).join(', ')] : [])
+  ];
+  const subject = 'Referral — ' + [val('firstName'), val('lastName')].join(' ');
+  return 'mailto:' + FALLBACK_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+}
+
+/* --- send --- */
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  showError('');
+  const found = problems();
+  if (found.length) { showError(found.join(' ')); formError.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+
+  const self = roleSelect.value === 'Self-referral';
+  const payload = {
+    referrerRole: roleSelect.value,
+    referrerName: self ? '' : val('referrerName'),
+    referrerOrganisation: self ? '' : val('referrerOrganisation'),
+    referrerEmail: self ? '' : val('referrerEmail'),
+    referrerPhone: self ? '' : val('referrerPhone'),
+    isSelfReferral: self,
+    firstName: val('firstName'), lastName: val('lastName'), preferredName: val('preferredName'),
+    dob: val('dob'), ndisNumber: val('ndisNumber'), phone: val('phone'), email: val('email'), address: val('address'),
+    planStartDate: val('planStartDate'), planEndDate: val('planEndDate'), fundingManagement: val('fundingManagement'),
+    planManagerName: val('planManagerName'), planManagerEmail: val('planManagerEmail'), planManagerPhone: val('planManagerPhone'),
+    supportsWanted: val('supportsWanted'), supportTypes: val('supportTypes'), preferredStart: val('preferredStart'),
+    travelNeeds: val('travelNeeds'), coreBudget: val('coreBudget'),
+    aboutParticipant: val('aboutParticipant'),
+    emergencyContactName: val('emergencyContactName'), emergencyContactRelationship: val('emergencyContactRelationship'),
+    emergencyContactPhone: val('emergencyContactPhone'),
+    consent: $('rf-consent').checked,
+    company: val('company')
+  };
+  if (suggestion && suggestionSignature && $('rf-include').checked) {
+    payload.supportSuggestion = suggestion;
+    payload.supportSuggestionSignature = suggestionSignature;
+  }
+
+  const btn = $('submitBtn');
+  btn.disabled = true;
+  btn.firstChild.textContent = 'Sending… ';
+  const ok = $('formOk');
+
+  let result;
+  try {
+    const res = await fetch(API_BASE + '/public/referrals', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 400 || res.status === 429) {
+      showError((data && data.message) || 'Please check the form and try again.');
+      btn.disabled = false; btn.firstChild.textContent = 'Send the referral ';
+      return;
+    }
+    if (!res.ok) throw new Error('Portal responded ' + res.status);
+    result = data;
+  } catch (err) {
+    ok.classList.add('show');
+    ok.textContent = 'We couldn’t reach our system, so your email app is opening with the referral written out — just press send' + (files.length ? ' and attach the documents' : '') + '.';
+    window.location.href = buildMailto();
+    btn.disabled = false; btn.firstChild.textContent = 'Send the referral ';
+    return;
+  }
+
+  // Documents, one at a time, with a visible state each.
+  const failed = [];
+  if (result.reference && result.uploadToken && files.length) {
+    const states = files.map(() => 'Waiting…');
+    for (let i = 0; i < files.length; i += 1) {
+      states[i] = 'Uploading…'; renderFiles(states);
+      const body = new FormData();
+      body.append('reference', result.reference);
+      body.append('token', result.uploadToken);
+      body.append('file', files[i]);
+      try {
+        const res = await fetch(API_BASE + '/public/referrals/files', { method: 'POST', body });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error((data && data.message) || 'Upload failed');
+        states[i] = 'Sent ✓';
+      } catch (err) {
+        states[i] = 'Not sent';
+        failed.push(files[i].name);
+      }
+      renderFiles(states);
+    }
+  }
+
+  ok.replaceChildren();
+  ok.appendChild(document.createTextNode('Thank you — your referral is with our team.'));
+  if (result.reference) {
+    ok.appendChild(el('span', 'ref', result.reference));
+    ok.appendChild(document.createTextNode('A real person will be in touch within one business day. Keep this reference in case you need to add anything.'));
+  } else {
+    ok.appendChild(document.createTextNode(' A real person will be in touch within one business day.'));
+  }
+  if (failed.length) {
+    ok.appendChild(el('span', null, ' We couldn’t upload ' + failed.join(', ') + ' — please email ' + (failed.length === 1 ? 'it' : 'them') + ' to ' + FALLBACK_EMAIL + (result.reference ? ' and quote ' + result.reference : '') + '.'));
+  }
+  ok.classList.add('show');
+  btn.style.display = 'none';
+  form.querySelectorAll('input, select, textarea, button.tbc, #matchBtn').forEach((n) => { n.disabled = true; });
+  ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
+</body>
+</html>
