@@ -412,21 +412,21 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
           <div class="field-row">
             <div class="field" id="f-referrerName">
               <label for="rf-name">Your name</label>
-              <input id="rf-name" name="referrerName" type="text" autocomplete="name">
+              <input id="rf-name" name="referrerName" maxlength="200" type="text" autocomplete="name">
             </div>
             <div class="field">
               <label for="rf-org">Organisation <span class="opt">(if any)</span></label>
-              <input id="rf-org" name="referrerOrganisation" type="text" autocomplete="organization">
+              <input id="rf-org" name="referrerOrganisation" maxlength="200" type="text" autocomplete="organization">
             </div>
           </div>
           <div class="field-row">
             <div class="field" id="f-referrerEmail">
               <label for="rf-email">Your email</label>
-              <input id="rf-email" name="referrerEmail" type="email" autocomplete="email">
+              <input id="rf-email" name="referrerEmail" maxlength="200" type="email" autocomplete="email">
             </div>
             <div class="field" id="f-referrerPhone">
               <label for="rf-phone">Your phone</label>
-              <input id="rf-phone" name="referrerPhone" type="tel" autocomplete="tel">
+              <input id="rf-phone" name="referrerPhone" maxlength="50" type="tel" autocomplete="tel">
             </div>
           </div>
         </div>
@@ -445,15 +445,15 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         <div class="field-row-3">
           <div class="field" id="f-firstName">
             <label for="rf-first">First name</label>
-            <input id="rf-first" name="firstName" type="text" autocomplete="off">
+            <input id="rf-first" name="firstName" maxlength="160" type="text" autocomplete="off">
           </div>
           <div class="field" id="f-lastName">
             <label for="rf-last">Last name</label>
-            <input id="rf-last" name="lastName" type="text" autocomplete="off">
+            <input id="rf-last" name="lastName" maxlength="160" type="text" autocomplete="off">
           </div>
           <div class="field">
             <label for="rf-pref"><span data-v-other="Goes by" data-v-self="What you like to be called">Goes by</span> <span class="opt">(optional)</span></label>
-            <input id="rf-pref" name="preferredName" type="text" autocomplete="off">
+            <input id="rf-pref" name="preferredName" maxlength="160" type="text" autocomplete="off">
           </div>
         </div>
         <div class="field-row">
@@ -463,23 +463,23 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
           </div>
           <div class="field">
             <label for="rf-ndis">NDIS number <span class="opt">(optional)</span></label>
-            <input id="rf-ndis" name="ndisNumber" type="text" inputmode="numeric" autocomplete="off" placeholder="9 digits">
+            <input id="rf-ndis" name="ndisNumber" maxlength="40" type="text" inputmode="numeric" autocomplete="off" placeholder="9 digits">
           </div>
         </div>
         <div class="field-row">
           <div class="field" id="f-phone">
             <label for="rf-pphone"><span data-v-other="Their phone" data-v-self="Your phone">Their phone</span> <span class="opt" data-only="other">(optional)</span></label>
-            <input id="rf-pphone" name="phone" type="tel" autocomplete="off">
+            <input id="rf-pphone" name="phone" maxlength="50" type="tel" autocomplete="off">
           </div>
           <div class="field" id="f-email">
             <label for="rf-pemail"><span data-v-other="Their email" data-v-self="Your email">Their email</span> <span class="opt" data-only="other">(optional)</span></label>
-            <input id="rf-pemail" name="email" type="email" autocomplete="off">
+            <input id="rf-pemail" name="email" maxlength="200" type="email" autocomplete="off">
           </div>
         </div>
         <p class="hint" data-only="self" hidden>So we can get back to you — a phone number or an email is fine.</p>
         <div class="field">
           <label for="rf-address"><span data-v-other="Their address or suburb" data-v-self="Your address or suburb">Their address or suburb</span> <span class="opt">(optional)</span></label>
-          <input id="rf-address" name="address" type="text" autocomplete="off">
+          <input id="rf-address" name="address" maxlength="400" type="text" autocomplete="off">
         </div>
       </fieldset>
 
@@ -516,15 +516,15 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         <div class="field-row-3">
           <div class="field">
             <label for="rf-pmname">Plan manager</label>
-            <input id="rf-pmname" name="planManagerName" type="text" autocomplete="off" placeholder="Organisation">
+            <input id="rf-pmname" name="planManagerName" maxlength="200" type="text" autocomplete="off" placeholder="Organisation">
           </div>
           <div class="field">
             <label for="rf-pmemail">Plan manager email</label>
-            <input id="rf-pmemail" name="planManagerEmail" type="email" autocomplete="off">
+            <input id="rf-pmemail" name="planManagerEmail" maxlength="200" type="email" autocomplete="off">
           </div>
           <div class="field">
             <label for="rf-pmphone">Plan manager phone</label>
-            <input id="rf-pmphone" name="planManagerPhone" type="tel" autocomplete="off">
+            <input id="rf-pmphone" name="planManagerPhone" maxlength="50" type="tel" autocomplete="off">
           </div>
         </div>
       </fieldset>
@@ -543,28 +543,28 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
             <label for="rf-supports">Days, times and hours a week</label>
             <button type="button" class="tbc" data-tbc="rf-supports" aria-pressed="false">TBC</button>
           </div>
-          <textarea id="rf-supports" name="supportsWanted" placeholder="e.g. Mondays and Fridays, late morning — about 6 hours a week. Maybe a Saturday outing every second week."></textarea>
+          <textarea id="rf-supports" name="supportsWanted" maxlength="4000" placeholder="e.g. Mondays and Fridays, late morning — about 6 hours a week. Maybe a Saturday outing every second week."></textarea>
         </div>
         <div class="field">
           <div class="field-top">
             <label for="rf-types">Type of support</label>
             <button type="button" class="tbc" data-tbc="rf-types" aria-pressed="false">TBC</button>
           </div>
-          <textarea id="rf-types" name="supportTypes" style="min-height:90px" placeholder="e.g. Help keeping on top of cleaning and cooking, getting to appointments, and getting out to meet people."></textarea>
+          <textarea id="rf-types" name="supportTypes" maxlength="2000" style="min-height:90px" placeholder="e.g. Help keeping on top of cleaning and cooking, getting to appointments, and getting out to meet people."></textarea>
         </div>
         <div class="field">
           <div class="field-top">
             <label for="rf-start">Preferred start date</label>
             <button type="button" class="tbc" data-tbc="rf-start" aria-pressed="false">TBC</button>
           </div>
-          <input id="rf-start" name="preferredStart" type="text" placeholder="e.g. As soon as possible, or early October">
+          <input id="rf-start" name="preferredStart" maxlength="200" type="text" placeholder="e.g. As soon as possible, or early October">
         </div>
         <div class="field">
           <div class="field-top">
             <label for="rf-travel">Travel and transport needs</label>
             <button type="button" class="tbc" data-tbc="rf-travel" aria-pressed="false">TBC</button>
           </div>
-          <textarea id="rf-travel" name="travelNeeds" style="min-height:80px" placeholder="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week." data-ph-other="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week." data-ph-self="e.g. I don't drive — I'd need lifts to the GP and shops, maybe 20 km a week."></textarea>
+          <textarea id="rf-travel" name="travelNeeds" maxlength="2000" style="min-height:80px" placeholder="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week." data-ph-other="e.g. Doesn't drive — would need lifts to the GP and shops, maybe 20 km a week." data-ph-self="e.g. I don't drive — I'd need lifts to the GP and shops, maybe 20 km a week."></textarea>
         </div>
 
         <div class="helper" id="helper">
@@ -598,20 +598,20 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
         </div>
         <div class="field">
           <label for="rf-about">Anything else we should know? <span class="opt">(optional)</span></label>
-          <textarea id="rf-about" name="aboutParticipant" style="min-height:140px" placeholder="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate." data-ph-other="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate." data-ph-self="Your goals, what matters to you, health or safety considerations, what has and hasn't worked before, how you like to communicate."></textarea>
+          <textarea id="rf-about" name="aboutParticipant" maxlength="8000" style="min-height:140px" placeholder="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate." data-ph-other="Their goals, what matters to them, health or safety considerations, what has and hasn't worked before, how they like to communicate." data-ph-self="Your goals, what matters to you, health or safety considerations, what has and hasn't worked before, how you like to communicate."></textarea>
         </div>
         <div class="field-row-3">
           <div class="field">
             <label for="rf-ecname">Emergency contact <span class="opt">(optional)</span></label>
-            <input id="rf-ecname" name="emergencyContactName" type="text" autocomplete="off" placeholder="Name">
+            <input id="rf-ecname" name="emergencyContactName" maxlength="200" type="text" autocomplete="off" placeholder="Name">
           </div>
           <div class="field">
             <label for="rf-ecrel">Relationship</label>
-            <input id="rf-ecrel" name="emergencyContactRelationship" type="text" autocomplete="off" placeholder="e.g. Sister">
+            <input id="rf-ecrel" name="emergencyContactRelationship" maxlength="120" type="text" autocomplete="off" placeholder="e.g. Sister">
           </div>
           <div class="field">
             <label for="rf-ecphone">Their phone <span class="opt">(the contact's)</span></label>
-            <input id="rf-ecphone" name="emergencyContactPhone" type="tel" autocomplete="off">
+            <input id="rf-ecphone" name="emergencyContactPhone" maxlength="50" type="tel" autocomplete="off">
           </div>
         </div>
       </fieldset>
@@ -640,8 +640,8 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
 
         <!-- Honeypot: hidden from people, catches bots. Do not remove. -->
         <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
-          <label for="rf-company">Company (leave this blank)</label>
-          <input id="rf-company" name="company" type="text" tabindex="-1" autocomplete="off">
+          <label for="rf-hp">Leave this empty</label>
+          <input id="rf-hp" name="rf_hp_check" type="text" tabindex="-1" autocomplete="off">
         </div>
 
         <div class="submit-row">
@@ -1067,7 +1067,7 @@ form.addEventListener('submit', async (e) => {
     emergencyContactName: val('emergencyContactName'), emergencyContactRelationship: val('emergencyContactRelationship'),
     emergencyContactPhone: val('emergencyContactPhone'),
     consent: $('rf-consent').checked,
-    company: val('company')
+    company: val('rf_hp_check')
   };
   if (suggestion && suggestionSignature && $('rf-include').checked) {
     payload.supportSuggestion = suggestion;
@@ -1086,7 +1086,10 @@ form.addEventListener('submit', async (e) => {
     });
     const data = await res.json().catch(() => ({}));
     if (res.status === 400 || res.status === 429) {
-      showError((data && data.message) || 'Please check the form and try again.');
+      const message = Array.isArray(data && data.message) ? data.message.join(' ') : (data && data.message) || '';
+      showError(/must be|should not|shorter|longer than/i.test(message) || !message
+        ? 'Something in the form couldn\u2019t be sent as it is. Please check your answers, or email the details to ' + FALLBACK_EMAIL + '.'
+        : message);
       btn.disabled = false; btn.firstChild.textContent = 'Send the referral ';
       return;
     }
@@ -1107,11 +1110,13 @@ form.addEventListener('submit', async (e) => {
     for (let i = 0; i < files.length; i += 1) {
       states[i] = 'Uploading…'; renderFiles(states);
       const body = new FormData();
-      body.append('reference', result.reference);
-      body.append('token', result.uploadToken);
       body.append('file', files[i]);
       try {
-        const res = await fetch(API_BASE + '/public/referrals/files', { method: 'POST', body });
+        const res = await fetch(API_BASE + '/public/referrals/files', {
+          method: 'POST',
+          headers: { 'X-Referral-Reference': result.reference, 'X-Referral-Token': result.uploadToken },
+          body
+        });
         const data = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error((data && data.message) || 'Upload failed');
         states[i] = 'Sent ✓';
