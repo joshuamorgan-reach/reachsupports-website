@@ -359,7 +359,7 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
       <article class="promise-card" data-reveal style="--d:.16s">
         <div class="glyph">❓</div>
         <h3>TBC is a fine answer</h3>
-        <p>Don't have the plan dates or budget to hand? Tap TBC and send it anyway — we'll confirm everything together.</p>
+        <p>Don't have the plan dates or a start date yet? Tap TBC and send it anyway — we'll confirm everything together.</p>
       </article>
       <article class="promise-card" data-reveal style="--d:.24s">
         <div class="glyph">📎</div>
@@ -552,21 +552,12 @@ footer{margin-top:var(--section-pad);background:var(--ink);color:rgba(250,249,24
           </div>
           <textarea id="rf-types" name="supportTypes" style="min-height:90px" placeholder="e.g. Help keeping on top of cleaning and cooking, getting to appointments, and getting out to meet people."></textarea>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <div class="field-top">
-              <label for="rf-start">Preferred start date</label>
-              <button type="button" class="tbc" data-tbc="rf-start" aria-pressed="false">TBC</button>
-            </div>
-            <input id="rf-start" name="preferredStart" type="text" placeholder="e.g. As soon as possible, or early October">
+        <div class="field">
+          <div class="field-top">
+            <label for="rf-start">Preferred start date</label>
+            <button type="button" class="tbc" data-tbc="rf-start" aria-pressed="false">TBC</button>
           </div>
-          <div class="field">
-            <div class="field-top">
-              <label for="rf-budget">Core budget available</label>
-              <button type="button" class="tbc" data-tbc="rf-budget" aria-pressed="false">TBC</button>
-            </div>
-            <input id="rf-budget" name="coreBudget" type="text" placeholder="e.g. About $35,000 core for the plan year">
-          </div>
+          <input id="rf-start" name="preferredStart" type="text" placeholder="e.g. As soon as possible, or early October">
         </div>
         <div class="field">
           <div class="field-top">
@@ -913,8 +904,7 @@ $('matchBtn').addEventListener('click', async () => {
     supportsWanted: val('supportsWanted'),
     supportTypes: val('supportTypes'),
     travelNeeds: val('travelNeeds'),
-    preferredStart: val('preferredStart'),
-    coreBudget: val('coreBudget')
+    preferredStart: val('preferredStart')
   };
   if (![body.supportsWanted, body.supportTypes, body.travelNeeds].some((v) => v && !/^tbc$/i.test(v))) {
     setHelperStatus('Describe the supports above first — even roughly is fine.', true);
@@ -1039,7 +1029,7 @@ function buildMailto() {
     '',
     'SUPPORTS WANTED',
     'Days, times, hours: ' + val('supportsWanted'), 'Type of support: ' + val('supportTypes'),
-    'Preferred start: ' + val('preferredStart'), 'Core budget: ' + val('coreBudget'), 'Travel: ' + val('travelNeeds'),
+    'Preferred start: ' + val('preferredStart'), 'Travel: ' + val('travelNeeds'),
     '',
     'ABOUT THEM',
     val('aboutParticipant'),
@@ -1072,7 +1062,7 @@ form.addEventListener('submit', async (e) => {
     planStartDate: val('planStartDate'), planEndDate: val('planEndDate'), fundingManagement: val('fundingManagement'),
     planManagerName: val('planManagerName'), planManagerEmail: val('planManagerEmail'), planManagerPhone: val('planManagerPhone'),
     supportsWanted: val('supportsWanted'), supportTypes: val('supportTypes'), preferredStart: val('preferredStart'),
-    travelNeeds: val('travelNeeds'), coreBudget: val('coreBudget'),
+    travelNeeds: val('travelNeeds'),
     aboutParticipant: val('aboutParticipant'),
     emergencyContactName: val('emergencyContactName'), emergencyContactRelationship: val('emergencyContactRelationship'),
     emergencyContactPhone: val('emergencyContactPhone'),
